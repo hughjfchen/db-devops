@@ -1,0 +1,22 @@
+2017-05-17 22:19:24,112 [main] INFO  db-devops.env - 
+-=[memory_hole started successfully using the development profile]=- 
+2017-05-17 22:19:24,216 [main] INFO  luminus.http-server - starting HTTP server on port 3000 
+2017-05-17 22:19:24,287 [main] INFO  org.xnio - XNIO version 3.3.6.Final 
+2017-05-17 22:19:24,449 [main] INFO  org.projectodd.wunderboss.web.Web - Registered web context / 
+2017-05-17 22:19:24,451 [main] INFO  luminus.repl-server - starting nREPL server on port 7000 
+2017-05-17 22:19:24,474 [main] INFO  db-devops.core - #'db-devops.config/env started 
+2017-05-17 22:19:24,474 [main] INFO  db-devops.core - #'db-devops.db.core/*db* started 
+2017-05-17 22:19:24,475 [main] INFO  db-devops.core - #'db-devops.routes.services.auth/host started 
+2017-05-17 22:19:24,475 [main] INFO  db-devops.core - #'db-devops.routes.services.auth/ldap-pool started 
+2017-05-17 22:19:24,475 [main] INFO  db-devops.core - #'db-devops.handler/init-app started 
+2017-05-17 22:19:24,475 [main] INFO  db-devops.core - #'db-devops.core/http-server started 
+2017-05-17 22:19:24,475 [main] INFO  db-devops.core - #'db-devops.core/repl-server started 
+2017-05-17 22:20:20,916 [XNIO-1 task-28] INFO  db-devops.routes.services.auth - user: Hugh successfully logged in from 0:0:0:0:0:0:0:1 localhost 
+2017-05-17 22:26:35,192 [Thread-3] INFO  luminus.repl-server - nREPL server stopped 
+2017-05-17 22:26:35,202 [Thread-3] INFO  luminus.http-server - HTTP server stopped 
+2017-05-17 22:26:35,203 [Thread-3] INFO  db-devops.env - 
+-=[memory_hole has shut down successfully]=- 
+2017-05-17 22:26:35,214 [Thread-3] INFO  db-devops.core - #'db-devops.core/repl-server stopped 
+2017-05-17 22:26:35,214 [Thread-3] INFO  db-devops.core - #'db-devops.core/http-server stopped 
+2017-05-17 22:26:35,214 [Thread-3] INFO  db-devops.core - #'db-devops.handler/init-app stopped 
+2017-05-17 22:26:35,215 [Thread-3] INFO  db-devops.core - #'db-devops.db.core/*db* stopped 
