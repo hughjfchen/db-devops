@@ -4,6 +4,7 @@
             [luminus.http-server :as http]
             [luminus-migrations.core :as migrations]
             [db-devops.config :refer [env]]
+            [db-devops.http-client :refer [http-client]]
             [clojure.tools.cli :refer [parse-opts]]
             [clojure.tools.logging :as log]
             [mount.core :as mount])
@@ -60,4 +61,3 @@ repl-server
       (System/exit 0))
     :else
     (start-app args)))
-

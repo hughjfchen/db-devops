@@ -4,8 +4,8 @@
 (def defaults
   {:init
    (fn []
-     (log/info "\n-=[memory_hole started successfully]=-"))
+     (log/info "\n-=[db_devops started successfully]=-"))
    :stop
    (fn []
-     (log/info "\n-=[memory_hole has shut down successfully]=-"))
+     (log/info "\n-=[db_devops has shut down successfully]=-"))
    :middleware identity})

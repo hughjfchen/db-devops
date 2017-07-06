@@ -1,21 +1,17 @@
 (ns db-devops.pages.issues
-  (:require [cljsjs.showdown]
-            [clojure.set :refer [difference rename-keys]]
+  (:require [clojure.set :refer [difference rename-keys]]
             [reagent.core :as r]
             [re-frame.core :refer [dispatch subscribe]]
-            [re-com.core
-             :refer [box v-box h-split v-split title flex-child-style input-text input-textarea single-dropdown]]
+            [soda-ash.core :as sa]
             [db-devops.datetime :as dt]
-            [re-com.splits
-             :refer [hv-split-args-desc]]
             [db-devops.attachments :refer [upload-form]]
-            [db-devops.bootstrap :as bs]
             [db-devops.pages.common :refer [validation-modal confirm-modal]]
             [db-devops.routes :refer [href navigate!]]
             [db-devops.validation :as v]
             [db-devops.widgets.tag-editor :refer [tag-editor]]))
 
-(def rounded-panel (flex-child-style "1"))
+;;(def rounded-panel (flex-child-style "1"))
+(def rounded-panel (sa/Segment))
 
 (defn highlight-code [node]
   (let [nodes (.querySelectorAll (r/dom-node node) "pre code")]
@@ -39,7 +35,7 @@
            {:__html (.makeHtml md-parser (str content))}}])})))
 
 (defn preview-panel [text]
-  [box
+  [sa/Segment
    :size "auto"
    :class "issue-detail"
    :child
@@ -74,7 +70,7 @@
      (fn [] [:textarea])}))
 
 (defn edit-panel [text]
-  [box
+  [sa/Segment
    :class "issue-detail"
    :size "auto"
    :child [:div.issue-detail [editor text]]])
@@ -96,7 +92,7 @@
 
 (defn delete-issue-button [{:keys [support-issue-id]}]
   (r/with-let [confirm-open? (r/atom false)]
-    [bs/Button
+    [sa/Button
      {:bs-style "danger"
       :on-click #(reset! confirm-open? true)}
      "Delete"
@@ -120,13 +116,13 @@
       "Discard"]
      [validation-modal errors]
      [:div.btn-toolbar.pull-right
-      [bs/Button
+      [sa/Button
        {:bs-style "warning"
         :on-click #(if (issue-updated? @original-issue @edited-issue)
                     (reset! confirm-open? true)
                     (cancel-edit))}
        "Cancel"]
-      [bs/Button
+      [sa/Button
        {:bs-style   "success"
         :pull-right true
         :on-click   #(when-not (reset! errors (v/validate-issue @edited-issue))
@@ -171,7 +167,7 @@
   (r/with-let [open? (r/atom false)]
     [:div
      [attachment-list support-issue-id @files]
-     [bs/Button
+     [sa/Button
       {:on-click #(reset! open? true)}
       "Attach File"]
      [upload-form
@@ -183,7 +179,7 @@
 (defn issue-detail-pane [detail]
   (r/with-let [preview (r/atom :split)]
     [:div
-     [bs/ControlLabel "Issue Details"]
+     [sa/Label "Issue Details"]
      [:span.pull-right
       {:style {:display "float"}}
       [:a.editor-view-button
@@ -200,7 +196,7 @@
        [:span.fa.fa-file-text-o]]]
      (case @preview
        :split
-       [h-split
+       [sa/Segment
         :class "issue-detail"
         :panel-1 [edit-panel detail]
         :panel-2 [preview-panel @detail]
@@ -222,7 +218,7 @@
                summary        (r/cursor edited-issue [:summary])
                detail         (r/cursor edited-issue [:detail])
                tags           (r/cursor edited-issue [:tags])]
-    [v-box
+    [sa/Segment
      :size "auto"
      :gap "10px"
      :height "auto"
@@ -232,23 +228,23 @@
         [:h3.page-title (if @original-issue "Edit Issue" "Add Issue")]]
        [:div.col-sm-6
         [control-buttons original-issue edited-issue]]]
-      [bs/FormGroup
-       [bs/ControlLabel "Issue Title"]
-       [input-text
+      [sa/FormGroup
+       [sa/Label "Issue Title"]
+       [sa/FormField
         :model title
         :width "100%"
         :class "edit-issue-title"
         :placeholder "Title of the issue"
         :on-change #(reset! title %)]]
-      [bs/FormGroup
-       [bs/ControlLabel "Issue Summary"]
-       [input-text
+      [sa/FormGroup
+       [sa/Label "Issue Summary"]
+       [sa/FormField
         :model summary
         :width "100%"
         :placeholder "Issue summary"
         :on-change #(reset! summary %)]]
-      [bs/FormGroup
-       [bs/ControlLabel "Issue Tags"]
+      [sa/FormGroup
+       [sa/Label "Issue Tags"]
        [tag-editor tags]]
       [:div.row>div.col-sm-12
        [issue-detail-pane detail]]
@@ -262,12 +258,12 @@
 (defn view-issue-page []
   (let [issue (subscribe [:issue])]
     [:div.row>div.col-sm-12
-     [bs/Panel
+     [sa/Segment
       {:class "view-issue-panel"}
       [:div.row
        [:div.col-sm-12>h2
         (:title @issue)
-        [:span.pull-right [bs/Badge (str (:views @issue))]]]
+        [:span.pull-right [sa/Menu (str (:views @issue))]]]
        [:div.col-sm-12>p (:summary @issue)]
        [:div.col-sm-12.padded-bottom (render-tags (:tags @issue))]
        [:div.col-sm-12>p
@@ -286,4 +282,3 @@
          [delete-issue-button @issue]
          [:a.btn.btn-primary
           (href "/edit-issue") "Edit"]]]]]]))
-

@@ -1,5 +1,5 @@
 (ns db-devops.pages.admin.users
-  (:require [db-devops.bootstrap :as bs]
+  (:require [soda-ash.core :as sa]
             [re-frame.core :refer [dispatch subscribe]]
             [db-devops.key-events :refer [on-enter]]
             [db-devops.pages.common :refer [validation-modal]]
@@ -10,15 +10,15 @@
   (r/with-let [search    (r/atom nil)
                do-search #(when-let [value (not-empty @search)]
                            (dispatch [:admin/search-for-users value]))]
-    [bs/FormGroup
-     [bs/InputGroup
-      [bs/FormControl
+    [sa/FormGroup
+     [sa/FormGroup
+      [sa/FormField
        {:type        "text"
         :class       "input-sm"
         :placeholder "Type in a user name to see their details"
         :on-change   #(reset! search (-> % .-target .-value))
         :on-key-down #(on-enter % do-search)}]
-      [bs/InputGroup.Button
+      [sa/FormGroup
        [:button.btn.btn-sm.btn-default
         {:on-click do-search}
         "Search"]]]]))
@@ -50,12 +50,12 @@
         "Save"]]]]))
 
 (defn field-group [label cursor type placeholder]
-  [bs/FormGroup
-   [bs/ControlLabel
+  [sa/FormGroup
+   [sa/FormField
     {:class "col-lg-2"}
     label]
    [:div.col-lg-10
-    [bs/FormControl
+    [sa/FormField
      {:type        type
       :value       (or @cursor "")
       :on-change   #(reset! cursor (-> % .-target .-value))
@@ -86,14 +86,14 @@
       "Confirm password"
       (r/cursor user [:pass-confirm])
       :password "Confirm the password for the user"]
-     [bs/FormGroup
+     [sa/FormGroup
       [:span.col-lg-2]
       [:div.col-lg-10
-       [bs/Checkbox
+       [sa/FormCheckbox
         {:checked   (boolean (:admin @user))
          :on-change #(swap! user update :admin not)}
         "Admin"]
-       [bs/Checkbox
+       [sa/FormCheckbox
         {:checked   (boolean (:is-active @user))
          :on-change #(swap! user update :is-active not)}
         "Active"]]]
@@ -101,7 +101,7 @@
 
 (defn user-info [user-map]
   (r/with-let [expanded? (r/atom false)]
-    [bs/ListGroupItem
+    [sa/FormGroup
      (if @expanded?
        [edit-user "Edit User" user-map #(reset! expanded? false)]
        [:div
@@ -113,7 +113,7 @@
 (defn user-list []
   (let [users (subscribe [:admin/users])]
     (when-not (empty? @users)
-      [bs/ListGroup
+      [sa/FormGroup
        (for [user @users]
          ^{:key (:user-id user)}
          [user-info user])])))
@@ -132,4 +132,3 @@
           {:on-click #(reset! show-new-user-form? true)}
           "Add new user"]]]
        [user-list]])))
-

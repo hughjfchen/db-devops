@@ -3,7 +3,7 @@
             [clojure.set :refer [difference]]
             [reagent.core :as r]
             [re-frame.core :refer [subscribe]]
-            [db-devops.bootstrap :as bs]))
+            [soda-ash.core :as sa]))
 
 (def key-up 38)
 (def key-down 40)

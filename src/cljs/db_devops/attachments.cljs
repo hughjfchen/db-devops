@@ -3,7 +3,7 @@
             [reagent.core :as r]
             [re-frame.core :refer [dispatch]]
             [db-devops.routes :refer [context-url]]
-            [db-devops.bootstrap :as bs])
+            [soda-ash.core :as sa])
   (:import goog.net.IframeIo
            goog.net.EventType
            [goog.events EventType]))
@@ -35,11 +35,10 @@
                             (reset! modal-open? false)
                             (reset! uploading? false)
                             (dispatch [:set-error error]))]
-    [bs/Modal
-     {:show @modal-open?}
-     [bs/Modal.Header
-      [bs/Modal.Title "Upload File"]]
-     [bs/Modal.Body
+    [sa/Modal
+     {:defaultOpen @modal-open?}
+     [sa/ModalHeader "Upload File"]
+     [sa/ModalContent
       (if @uploading?
         [:div.spinner
          [:div.bounce1]
@@ -53,7 +52,7 @@
           [:input {:type  "hidden" :name "support-issue-id"
                    :value (str support-issue-id)}]
           [:input.form-control {:id "file" :name "file" :type "file"}]]])]
-     [bs/Modal.Footer
+     [sa/ModalActions
       [:div.pull-right
        [:button.btn.btn-sm.btn-danger
         {:disabled @uploading?

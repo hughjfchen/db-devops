@@ -143,4 +143,3 @@
             {:handler #(dispatch [:remove-file-from-issue filename])
              :error-handler #(ajax-error %)})
     db))
-

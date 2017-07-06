@@ -3,32 +3,22 @@
   <head>
       <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>数据库运维系统</title>
+      <title>数据库升级系统</title>
+      <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
   </head>
   <body>
-    <div id="app"></div>
+      <div id="app"></div>
 
-    <!-- scripts and styles -->
-    {% style "/css/bootstrap.min.css" %}
-    {% style "/assets/font-awesome/css/font-awesome.min.css" %}
-    {% style "/assets/css/material-design-iconic-font.min.css" %}
-    {% style "/assets/css/re-com.css" %}
-    {% style "/css/simplemde.min.css" %}
-    {% style "/css/hljs.css" %}
-    {% style "/css/tag-editor.css" %}
-    {% style "/css/screen.css" %}
+      <!-- scripts and styles -->
+      {% style "/css/semantic.min.css" %}
+      {% style "/assets/font-awesome/css/font-awesome.min.css" %}
+      {% style "/assets/css/material-design-iconic-font.min.css" %}
 
-    <script type="text/javascript">
-        var context = "{{servlet-context}}";
-        var csrfToken = "{{csrf-token}}";
-        var user = {{user|json|safe}};
-    </script>
-    {% script "/js/simplemde.min.js" %}
-    {% script "/js/hljs.js" %}
-    <script src="{{servlet-context}}/js/app.js?{{timestamp}}" type="text/javascript"></script>
+      <script type="text/javascript">
+       var context = "{{servlet-context}}";
+       var csrfToken = "{{csrf-token}}";
+       var user = {{user|json|safe}};
+      </script>
+      <script src="{{servlet-context}}/js/app.js?{{timestamp}}" type="text/javascript"></script>
   </body>
 </html>
-
-
-
-

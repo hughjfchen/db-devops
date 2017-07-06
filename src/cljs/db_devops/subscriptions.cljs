@@ -11,13 +11,25 @@
 
 (reg-sub :active-page query)
 
+(reg-sub :active-upgrade-step query)
+
+(reg-sub :active-checklist-path query)
+
+(reg-sub :chosen-type query)
+
+(reg-sub :source-target query)
+
+(reg-sub :checklist query)
+
 (reg-sub :loading? query)
 
 (reg-sub :user query)
 
-(reg-sub :tags query)
+(reg-sub :notifications query)
 
-(reg-sub :selected-tag query)
+(reg-sub :statistics query)
+
+(reg-sub :selected-notification query)
 
 (reg-sub :issue query)
 
@@ -29,4 +41,3 @@
 
 ;;admin
 (reg-sub :admin/users query)
-

@@ -1,32 +1,76 @@
 (ns db-devops.views
   (:require [reagent.core :as r]
-            [re-frame.core :refer [subscribe]]
-            [db-devops.bootstrap :as bs]
-            [db-devops.routes :refer [context-url href navigate!]]
+            [re-frame.core :refer [dispatch subscribe]]
+            [soda-ash.core :as sa]
+            [db-devops.routes :refer [context-url href navigate! run-events]]
             [db-devops.pages.common :refer [loading-throbber error-modal]]
             [db-devops.pages.admin.users :refer [users-page]]
             [db-devops.pages.home :refer [home-page]]
             [db-devops.pages.issues :refer [edit-issue-page view-issue-page]]
+            [db-devops.pages.upgrade :refer [choose-type-page checklist-page upgrade-page verify-page]]
             [db-devops.pages.auth :refer [login-page logout]]))
 
-(defn nav-link [url title page]
-  (let [active-page (subscribe [:active-page])]
-    [bs/NavItem {:href (context-url url) :active (= page @active-page)} title]))
+(defn upgrade-notifications []
+  (r/with-let [upgrade-notifications (subscribe [:notifications])]
+    [sa/MenuItem
+     [sa/Label {:size "tiny" :color "red"} (count @upgrade-notifications)]
+     [sa/Dropdown
+      {:text "通知"
+       :icon "announcement"}
+      [sa/DropdownMenu
+       [sa/DropdownItem
+        {:on-click #(run-events [[:selected-notification ["db2test1" "db2_instance2"]] [:set-active-upgrade-step :choose-type] [:set-active-page :upgrade]])} "通知一 机器qqq上的数据库xxx需要升级"]
+       [sa/DropdownItem
+        {:on-click #(run-events [[:selected-notification ["localhost" "db2_instance1"]] [:set-active-upgrade-step :choose-type] [:set-active-page :upgrade]])} "通知二 机器kkk上的数据库yyy需要升级"]]]]))
 
 (defn navbar [{:keys [admin screenname]}]
-  [bs/Navbar
-   [bs/Navbar.Header]
-   [bs/Navbar.Brand
-    [:a#logo (href "/")
-     [:span "数据库升级系统"]]]
-   [bs/Navbar.Collapse
+  [sa/Menu
+   {:fixed "top"
+    :borderless true
+    :fluid true
+    :inverted true}
+   [sa/MenuItem
+    [sa/Image {:src "/image/cmb_logo1.png" :size "small" :href (context-url "/")}]]
+   [sa/MenuItem
+    [sa/Header
+     {:size "large" :inverted true} "数据库升级系统"]]
+   [sa/MenuMenu
+    {:position "right"}
+    [sa/MenuItem
+     {:on-click #(dispatch [:set-active-page :home])} "主页"]
+    [sa/MenuItem
+     {:on-click #(run-events [[:set-active-page :upgrade] [:set-active-upgrade-step :choose-type]])} "升级"]
+    [sa/MenuItem
+     {:on-click #(dispatch [:set-active-page :rollback])} "回退"]
+    ;[upgrade-notifications]
     (when admin
-      [bs/Nav
-       [nav-link "/users" "用户管理" :users]])
-    [bs/Nav {:pull-right true}
-     [bs/NavDropdown
-      {:id "logout-menu" :title screenname}
-      [bs/MenuItem {:on-click logout} "退出"]]]]])
+      [sa/MenuItem
+       [sa/Dropdown
+        {:text "系统管理"}
+        [sa/DropdownMenu
+         [sa/DropdownItem
+          {:on-click #(dispatch [:set-active-page :users])} "用户管理"]
+         [sa/DropdownItem
+          {:on-click identity} "检查项管理"]]]])
+    [sa/MenuItem
+     [sa/Dropdown
+      {:text screenname}
+      [sa/DropdownMenu
+       [sa/DropdownItem
+        {:on-click identity} "修改密码"]
+       [sa/DropdownItem
+        {:on-click logout} "退出"]]]]]])
+
+(defn footbar []
+  [sa/Menu
+   {:fixed "bottom"
+    :borderless true
+    :fluid true
+    :size "tiny"
+    :inverted true}
+   [sa/MenuItem
+    [sa/Container {:size "small" :textAlign "center"} "招商银行，2017"]]
+   ])
 
 (defmulti pages (fn [page _] page))
 (defmethod pages :home [_ _] [home-page])
@@ -40,7 +84,19 @@
   [edit-issue-page])
 (defmethod pages :view-issue [_ _]
   (.scrollTo js/window 0 0)
-  [view-issue-page])
+  [upgrade-page])
+(defmethod pages :choose-type [_ _]
+  (.scrollTo js/window 0 0)
+  [choose-type-page])
+(defmethod pages :checklist [_ _]
+  (.scrollTo js/window 0 0)
+  [checklist-page])
+(defmethod pages :upgrade [_ _]
+  ;(.scrollTo js/window 0 0)
+  [upgrade-page])
+(defmethod pages :verify [_ _]
+  (.scrollTo js/window 0 0)
+  [verify-page])
 (defmethod pages :default [_ _] [:div])
 
 (defn main-page []
@@ -51,6 +107,6 @@
        [navbar @user]
        [loading-throbber]
        [error-modal]
-       [:div.container.content
-        (pages @active-page @user)]]
+       (pages @active-page @user)
+       [footbar]]
       (pages :login nil))))

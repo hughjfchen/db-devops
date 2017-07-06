@@ -74,6 +74,10 @@
 
 (secretary/defroute (context-url "/users") []
   (run-events [[:set-active-page :users]]))
+
+(secretary/defroute (context-url "/upgrade") []
+  (run-events [[:set-active-page :upgrade]]))
+
 ;; -------------------------
 ;; History
 ;; must be called after routes have been defined

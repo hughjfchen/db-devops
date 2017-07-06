@@ -6,6 +6,7 @@
             [compojure.api.meta :refer [restructure-param]]
             [db-devops.routes.services.attachments :as attachments]
             [db-devops.routes.services.issues :as issues]
+            [db-devops.routes.services.checklist :as ck]
             [db-devops.routes.services.auth :as auth]
             [buddy.auth.accessrules :refer [restrict]]
             [buddy.auth :refer [authenticated?]]))
@@ -33,8 +34,8 @@
   {:swagger {:ui   "/swagger-ui"
              :spec "/swagger.json"
              :data {:info {:version     "1.0.0"
-                           :title       "Sample API"
-                           :description "Sample Services"}}}}
+                           :title       "数据库升级系统 API"
+                           :description "数据库升级系统后端 API"}}}}
 
   (POST "/api/login" req
     :return auth/LoginResponse
@@ -100,6 +101,75 @@
       :return issues/TagResult
       :summary "add a new tag"
       (issues/add-tag! {:tag tag}))
+
+    ;;checklist
+    (GET "/checklist" []
+         :return ck/ChecklistResult
+         :summary "list all checklist"
+         (ck/all-checklist))
+
+    (POST "/checklist-by-cat" []
+          :body-params [chosen-type :- ck/chosen-type
+                        current-path :- ck/current-path
+                        source :- ck/db-info
+                        target :- ck/db-info]
+          :return ck/ChecklistResult
+          :summary "list checklist by the given category"
+          (ck/checklist-by-cat {:chosen-type chosen-type :current-path current-path :source source :target target}))
+
+    (DELETE "/checklist/:id" []
+      :path-params [id :- s/Int]
+      :return s/Int
+      :summary "delete the checklist with the given id"
+      (ck/delete-checklist! {:checklist-id id}))
+
+    (POST "/search-checklist" []
+      :body-params [query :- s/Str
+                    limit :- s/Int
+                    offset :- s/Int]
+      :return ck/ChecklistResult
+      :summary "search for checklist matching the query"
+      (ck/search-checklist {:query  query
+                            :limit  limit
+                            :offset offset}))
+
+    (GET "/checklist/:id" []
+      :path-params [id :- s/Int]
+      :return ck/Checklist
+      :summary "returns the checklist with the given id"
+      (ck/checklist {:checklist-id id}))
+
+    (POST "/checklist" []
+      :current-user user
+      :body-params [title :- s/Str
+                    summary :- s/Str
+                    detail :- s/Str
+                    tags :- [s/Str]]
+      :return s/Int
+      :summary "adds a new checklist"
+      (ck/add-checklist!
+        {:title   title
+         :summary summary
+         :detail  detail
+         :tags    tags
+         :user-id (:user-id user)}))
+
+    (PUT "/checklist" []
+      :current-user user
+      :body-params [support-issue-id :- s/Int
+                    title :- s/Str
+                    summary :- s/Str
+                    detail :- s/Str
+                    tags :- [s/Str]]
+      :return s/Int
+      :summary "update an existing checklist"
+      (ck/update-checklist!
+        {:support-issue-id support-issue-id
+         :title            title
+         :summary          summary
+         :detail           detail
+         :tags             tags
+         :user-id          (:user-id user)}))
 
     ;;issues
     (GET "/issues" []

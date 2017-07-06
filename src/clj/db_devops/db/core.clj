@@ -18,8 +18,8 @@
             PreparedStatement]))
 
 (defstate ^:dynamic *db*
-  :start (conman/connect! {:jdbc-url (env :database-url)})
-  :stop (conman/disconnect! *db*))
+  :start (if (:production env) (conman/connect! {:jdbc-url (env :database-url)}))
+  :stop (if (:production env) (conman/disconnect! *db*)))
 
 (conman/bind-connection *db*
                         "sql/issues.sql"
@@ -177,4 +177,3 @@
                         :admin      admin
                         :is-active  is-active
                         :pass       pass})))))
-

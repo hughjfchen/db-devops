@@ -2,7 +2,7 @@
   (:require [cuerdas.core :as string]
             [reagent.core :as r]
             [ajax.core :refer [POST]]
-            [db-devops.bootstrap :as bs]
+            [soda-ash.core :as sa]
             [re-frame.core :refer [dispatch subscribe]]))
 
 (defn logged-in? []
@@ -36,29 +36,29 @@
                            (if (= 13 (.-keyCode e))
                              (login params error on-close)))]
     (when-not @user
-      [bs/Modal
-       {:show    true
-        :on-hide on-close}
-       [bs/Modal.Header [bs/Modal.Title "登录"]]
-       [bs/Modal.Body
+      [sa/Modal
+       {:defaultOpen true
+        :onClose on-close}
+       [sa/ModalHeader "登录"]
+       [sa/ModalContent
         (if @error
-          [bs/Alert {:bs-style "danger"} @error])
-        [bs/Form {:horizontal true}
-         [bs/FormGroup
-          [bs/Col {:class "text-right" :sm 4} [bs/ControlLabel "用户名"]]
-          [bs/Col {:sm 6}
+          [sa/Label {:bs-style "danger"} @error])
+        [sa/Form {:horizontal true}
+         [sa/FormGroup
+          [sa/FormField {:class "text-right" :sm 4} [sa/Label "用户名"]]
+          [sa/FormField {:sm 6}
            [:input.form-control
             {:type      "text"
              :value     (or (:userid @params) "")
              :on-change #(swap! params assoc :userid (-> % .-target .-value))
              :on-key-up on-key-up}]]]
-         [bs/FormGroup
-          [bs/Col {:class "text-right" :sm 4} [bs/ControlLabel "密码"]]
-          [bs/Col {:sm 6}
+         [sa/FormGroup
+          [sa/FormField {:class "text-right" :sm 4} [sa/Label "密码"]]
+          [sa/FormField {:sm 6}
            [:input.form-control
             {:type      "password"
              :value     (or (:pass @params) "")
              :on-change #(swap! params assoc :pass (-> % .-target .-value))
              :on-key-up on-key-up}]]]]]
-       [bs/Modal.Footer
+       [sa/ModalActions
         [:button.btn.btn-sm.btn-primary {:on-click #(login params error on-close)} "登录"]]])))

@@ -3,7 +3,7 @@
             [ajax.core :refer [DELETE GET POST PUT]]
             [db-devops.db :as db]
             db-devops.handlers.admin
-            db-devops.handlers.issues
+            db-devops.handlers.upgrade
             db-devops.handlers.tags))
 
 (reg-event-db
@@ -59,5 +59,3 @@
   (fn [db _]
     (assoc db :loading? true
               :error false)))
-
-

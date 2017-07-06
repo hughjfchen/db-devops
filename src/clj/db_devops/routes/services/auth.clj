@@ -92,10 +92,12 @@
          (db/update-user<! user))})))
 
 (defn local-login [userid pass]
-  (when-let [user (authenticate-local userid pass)]
-    (-> user
-        (merge {:member-of    []
-                :account-name userid}))))
+  (if (:production env)
+    (when-let [user (authenticate-local userid pass)]
+      (-> user
+          (merge {:member-of    []
+                  :account-name userid})))
+    {:user-id 2, :screenname "Hugh", :admin false, :last-login #inst "2017-05-16T17:26:27.911-00:00", :is-active true :member-of [] :account-name userid}))
 
 (defn ldap-login [userid pass]
   (when-let [user (authenticate-ldap userid pass)]
