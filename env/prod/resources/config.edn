@@ -2,5 +2,4 @@
  :port 3000
  :external-api {:remote-executor {:url "http://k.cmbchina.com/open/strategy/rs6000/exec_command"
                                   :script-home "/home/nemo/scripts/change/midware_control/"
-                                  :user "zjjglpt"
-                                  :pass "zjjglpt"}}}
+                                  :auth-info ["ooflow" "ooflow"]}}}

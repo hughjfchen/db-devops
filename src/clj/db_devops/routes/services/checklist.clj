@@ -37,12 +37,12 @@
              :input [{:name s/Keyword
                       :command-line s/Str}]
              :output {:field-path [s/Keyword]
-                      :result {:source s/Str :target s/Str}}}
+                      :result {:source s/Any :target s/Any}}}
    :verify {:type (s/enum :gt :lt :eq :ge :le :tf :compare :custom)
             :rule-fn-extra-paras [s/Any]
             :rule-fn s/Symbol
             :rule-description s/Str
-            :result s/Bool}
+            :result (s/maybe s/Bool)}
    :comply-suggestion s/Str
    (s/optional-key :create-date) Date
    :update-date                  (s/maybe Date)
@@ -55,14 +55,19 @@
    :source db-info
    (s/optional-key :target) db-info})
 
-(def ChecklistResult {:checklist [(-> Checklist
-                                      (dissoc :description)
-                                      (update-in [:execute] dissoc :script-name :input)
-                                      (update-in [:execute :output] dissoc :field-path)
-                                      (dissoc :comply-suggestion)
-                                      (dissoc :update-date)
-                                      (dissoc :update-by)
-                                      (update-in [:verify] dissoc :type :rule-fn :rule-fn-extra-paras))]})
+(defn adjust-checklist-for-response [c]
+  (-> c
+      (dissoc :description)
+      (update-in [:execute] dissoc :script-name :input)
+      (update-in [:execute :output] dissoc :field-path)
+      (dissoc :comply-suggestion)
+      (dissoc :update-date)
+      (dissoc :update-by)
+      (update-in [:verify] dissoc :type :rule-fn :rule-fn-extra-paras)))
+
+(def ChecklistResult {:checklist [(adjust-checklist-for-response Checklist)]
+                      :final-result s/Bool
+                      :number-of-failure s/Num})
 
 (def Issue
   {:support-issue-id             s/Num
@@ -121,22 +126,26 @@
         attached-result (-> cl
                             (update-in [:execute :output :result] assoc :source source-result)
                             (update-in [:execute :output :result] assoc :target target-result))
-        verify-result (apply (get-in cl [:verify :rule-fn]) (into exec-result (get-in cl [:verify :rule-fn-extra-paras])))]
+        verify-result (apply (get-in cl [:verify :rule-fn]) (into (vec (conj exec-result attached-result)) (get-in cl [:verify :rule-fn-extra-paras])))]
     (update-in attached-result [:verify] assoc :result verify-result)))
+
+(defn count-failure [coll]
+  (reduce (fn [cnt val] (if-not (get-in val [:verify :result]) (inc cnt) cnt)) 0 coll))
 
 (handler all-checklist []
          (ok {:checklist dbcl/ALL-CHECKLIST}))
 
 (handler checklist-by-cat [m]
-         (log/info m)
          (let [path (:current-path m)
                cat-cl (filter #(and (= (first path) (:first-cat %))
                                     (= (second path) (:second-cat %))) dbcl/ALL-CHECKLIST)
                cat-cl-to-exec (first cat-cl)
                cat-cl-exec-result (pmap (partial hc/call-checklist-script cat-cl-to-exec) [(:source m) (:target m)])
-               cat-cl-verify-result (map (partial attach-verify-cl cat-cl-exec-result) cat-cl)]
-           (log/info cat-cl-to-exec)
-           (ok {:checklist cat-cl-verify-result})))
+               cat-cl-verify-result (map (partial attach-verify-cl cat-cl-exec-result) cat-cl)
+               final-cl (map adjust-checklist-for-response cat-cl-verify-result)
+               number-of-failure (count-failure final-cl)
+               final-result (if (= number-of-failure 0) true false)]
+           (ok {:checklist final-cl :final-result final-result :number-of-failure number-of-failure})))
 
 ;(checklist-by-cat {:current-path [:aix-check :system-config]
 ;                   :chosen-type :cdc

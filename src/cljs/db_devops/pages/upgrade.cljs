@@ -96,83 +96,83 @@
      {:basic true
       :fluid true}
      [sa/Form
-      [sa/Segment
-       [sa/Grid
-        [sa/GridRow
-         [sa/Header "源数据库信息"]]
-        [sa/GridRow {:columns 3}
-         [sa/GridColumn
-          [sa/FormField
-           [sa/Label "机器名"]
-           [sa/Input {:value (get-in @source-target [:source :machine])
-                      :on-change #(dispatch [:set-source-target [:source-target :source] :machine (-> % .-target .-value)])}]]]
-         [sa/GridColumn
-          [sa/FormField
-           [sa/Label "IP"]
-           [sa/Input {:value (get-in @source-target [:source :ip])
-                      :on-change #(dispatch [:set-source-target [:source-target :source] :ip (-> % .-target .-value)])}]]]
-         [sa/GridColumn
-          [sa/FormField
-           [sa/Label "端口"]
-           [sa/Input {:value (get-in @source-target [:source :port])
-                      :on-change #(dispatch [:set-source-target [:source-target :source] :port (-> % .-target .-value)])}]]]]
-        [sa/GridRow {:columns 3}
-         [sa/GridColumn
-          [sa/FormField
-           [sa/Label "实例名"]
-           [sa/Input {:value (get-in @source-target [:source :instance])
-                      :on-change #(dispatch [:set-source-target [:source-target :source] :instance (-> % .-target .-value)])}]]]
-         [sa/GridColumn
-          [sa/FormField
-           [sa/Label "数据库名"]
-           [sa/Input {:value (get-in @source-target [:source :db])
-                      :on-change #(dispatch [:set-source-target [:source-target :source] :db (-> % .-target .-value)])}]]]
-         [sa/GridColumn
-          [sa/FormField
-           [sa/Label "数据库版本"]
-           [sa/FormSelect
-            {:value (get-in @source-target [:source :version])
-             :on-change #(dispatch [:set-source-target [:source-target :source] :version (-> % .-target .-value)])
-             :options (clj->js [{:key "9.5" :text "9.5" :value "9.5"} {:key "10.5" :text "10.5" :value "10.5"}])}]]]]]]
       (if (:cdc @choice)
         [sa/Segment
          [sa/Grid
           [sa/GridRow
-           [sa/Header "目标数据库信息"]]
+           [sa/Header "源数据库信息"]]
           [sa/GridRow {:columns 3}
            [sa/GridColumn
             [sa/FormField
              [sa/Label "机器名"]
-             [sa/Input {:value (get-in @source-target [:target :machine])
-                        :on-change #(dispatch [:set-source-target [:source-target :target] :machine (-> % .-target .-value)])}]]]
+             [sa/Input {:value (get-in @source-target [:source :machine])
+                        :on-change #(dispatch [:set-source-target [:source-target :source] :machine (-> % .-target .-value)])}]]]
            [sa/GridColumn
             [sa/FormField
              [sa/Label "IP"]
-             [sa/Input {:value (get-in @source-target [:target :ip])
-                        :on-change #(dispatch [:set-source-target [:source-target :target] :ip (-> % .-target .-value)])}]]]
+             [sa/Input {:value (get-in @source-target [:source :ip])
+                        :on-change #(dispatch [:set-source-target [:source-target :source] :ip (-> % .-target .-value)])}]]]
            [sa/GridColumn
             [sa/FormField
              [sa/Label "端口"]
-             [sa/Input {:value (get-in @source-target [:target :port])
-                        :on-change #(dispatch [:set-source-target [:source-target :target] :port (-> % .-target .-value)])}]]]]
+             [sa/Input {:value (get-in @source-target [:source :port])
+                        :on-change #(dispatch [:set-source-target [:source-target :source] :port (-> % .-target .-value)])}]]]]
           [sa/GridRow {:columns 3}
            [sa/GridColumn
             [sa/FormField
              [sa/Label "实例名"]
-             [sa/Input {:value (get-in @source-target [:target :instance])
-                        :on-change #(dispatch [:set-source-target [:source-target :target] :instance (-> % .-target .-value)])}]]]
+             [sa/Input {:value (get-in @source-target [:source :instance])
+                        :on-change #(dispatch [:set-source-target [:source-target :source] :instance (-> % .-target .-value)])}]]]
            [sa/GridColumn
             [sa/FormField
              [sa/Label "数据库名"]
-             [sa/Input {:value (get-in @source-target [:target :db])
-                        :on-change #(dispatch [:set-source-target [:source-target :target] :db (-> % .-target .-value)])}]]]
+             [sa/Input {:value (get-in @source-target [:source :db])
+                        :on-change #(dispatch [:set-source-target [:source-target :source] :db (-> % .-target .-value)])}]]]
            [sa/GridColumn
             [sa/FormField
              [sa/Label "数据库版本"]
              [sa/FormSelect
-              {:value (get-in @source-target [:target :version])
-               :on-change #(dispatch [:set-source-target [:source-target :target] :version (-> % .-target .-value)])
-               :options (clj->js [{:key "9.5" :text "9.5" :value "9.5"} {:key "10.5" :text "10.5" :value "10.5"}])}]]]]]])]
+              {:value (get-in @source-target [:source :version])
+               :on-change #(dispatch [:set-source-target [:source-target :source] :version (-> % .-target .-value)])
+               :options (clj->js [{:key "9.5" :text "9.5" :value "9.5"} {:key "10.5" :text "10.5" :value "10.5"}])}]]]]]])
+      [sa/Segment
+       [sa/Grid
+        [sa/GridRow
+         [sa/Header "目标数据库信息"]]
+        [sa/GridRow {:columns 3}
+         [sa/GridColumn
+          [sa/FormField
+           [sa/Label "机器名"]
+           [sa/Input {:value (get-in @source-target [:target :machine])
+                      :on-change #(dispatch [:set-source-target [:source-target :target] :machine (-> % .-target .-value)])}]]]
+         [sa/GridColumn
+          [sa/FormField
+           [sa/Label "IP"]
+           [sa/Input {:value (get-in @source-target [:target :ip])
+                      :on-change #(dispatch [:set-source-target [:source-target :target] :ip (-> % .-target .-value)])}]]]
+         [sa/GridColumn
+          [sa/FormField
+           [sa/Label "端口"]
+           [sa/Input {:value (get-in @source-target [:target :port])
+                      :on-change #(dispatch [:set-source-target [:source-target :target] :port (-> % .-target .-value)])}]]]]
+        [sa/GridRow {:columns 3}
+         [sa/GridColumn
+          [sa/FormField
+           [sa/Label "实例名"]
+           [sa/Input {:value (get-in @source-target [:target :instance])
+                      :on-change #(dispatch [:set-source-target [:source-target :target] :instance (-> % .-target .-value)])}]]]
+         [sa/GridColumn
+          [sa/FormField
+           [sa/Label "数据库名"]
+           [sa/Input {:value (get-in @source-target [:target :db])
+                      :on-change #(dispatch [:set-source-target [:source-target :target] :db (-> % .-target .-value)])}]]]
+         [sa/GridColumn
+          [sa/FormField
+           [sa/Label "数据库版本"]
+           [sa/FormSelect
+            {:value (get-in @source-target [:target :version])
+             :on-change #(dispatch [:set-source-target [:source-target :target] :version (-> % .-target .-value)])
+             :options (clj->js [{:key "9.5" :text "9.5" :value "9.5"} {:key "10.5" :text "10.5" :value "10.5"}])}]]]]]]]
      [sa/Divider]
      [sa/ButtonGroup
       {:floated "left"}
@@ -207,9 +207,10 @@
       [sa/TableRow
        [sa/TableCell (:title cl)]
        [sa/TableCell (get-in cl [:verify :rule-description])]
-       [sa/TableCell "值"]
-       [sa/TableCell "值"]
-       [sa/TableCell {:positive true} "通过"]
+       [sa/TableCell (get-in cl [:execute :output :result :source])]
+       [sa/TableCell (get-in cl [:execute :output :result :target])]
+       [sa/TableCell {:positive (get-in cl [:verify :result])
+                      :negative (not (get-in cl [:verify :result]))} (if (get-in cl [:verify :result]) "通过" "不通过")]
        [sa/TableCell ""]])]])
 
 (defn checklist-leaf [current-path {:keys [title path passed number-of-failure]}]

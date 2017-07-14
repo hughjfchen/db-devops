@@ -11,7 +11,7 @@
             [db-devops.widgets.tag-editor :refer [tag-editor]]))
 
 ;;(def rounded-panel (flex-child-style "1"))
-(def rounded-panel (sa/Segment))
+(def rounded-panel [sa/Segment])
 
 (defn highlight-code [node]
   (let [nodes (.querySelectorAll (r/dom-node node) "pre code")]

@@ -4,5 +4,4 @@
  :nrepl-port 7000
  :external-api {:remote-executor {:url "http://99.1.76.195/ngap/api/operation/rs6000/exec_command/ooflow"
                                   :script-home "/home/ooflow/scripts/middleware/db-upgrade"
-                                  :user "zjjglpt"
-                                  :pass "zjjglpt"}}}
+                                  :auth-info ["ooflow" "ooflow"]}}}
