@@ -1,7 +1,7 @@
 (ns db-devops.db.checklist
-  (:require [db-devops.db.core :as db]
-            [schema.core :as s]
-            [clojure.tools.logging :as log]))
+  (:require [schema.core :as s]
+            [clojure.tools.logging :as log]
+            [mount.core :refer [defstate]]))
 
 ;; verify functions for checklist
 ;; all functions should be pure. and accept three or more parameters
@@ -413,3 +413,6 @@ NEARSYNC【本地容灾】
 SUPERASYNC【多点容灾】"}}
                     {:checklist-id 225 :first-cat :db-check :second-cat :hadr-config :title "HADR_PEER_WINDOW" :execute {:script-name "get_aix_dbparm.py" :input [{:name :machine :command-line "-o"} {:name :instance :command-line "-i"} {:name :db :command-line "-d"} {:name :port :command-line "-p"} {:name :version :command-line "-v"}] :output {:field-path [:HADR_PEER_WINDOW]}} :verify {:type :eq :rule-fn-extra-paras [0] :rule-fn verify-fn-eq :rule-description "0"}}
                     ])
+
+;; default db for checklist
+(defstate default-checklist :start identity)

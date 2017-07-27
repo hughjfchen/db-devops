@@ -1,6 +1,6 @@
 (ns db-devops.routes.services.auth
   (:require [db-devops.config :refer [env]]
-            [db-devops.db.core :as db]
+            [db-devops.db.core :as db :refer [file-db]]
             [db-devops.validation :as v]
             [db-devops.routes.services.common :refer [handler]]
             [buddy.hashers :as hashers]
@@ -35,7 +35,7 @@
       (finally (client/release-connection ldap-pool conn)))))
 
 (defn authenticate-local [userid pass]
-  (when-let [user (db/user-by-screenname {:screenname userid})]
+  (when-let [user (db/get-record-by-field file-db :user :screenname userid)]
     (when (hashers/check pass (:pass user))
       (dissoc user :pass))))
 
@@ -64,15 +64,14 @@
 (handler find-users [screenname]
   (ok
     {:users
-     (db/users-by-screenname
-       {:screenname (str "%" screenname "%")})}))
+     (db/get-record-by-field file-db :user :screenname (str "%" screenname "%"))}))
 
 (handler register! [user]
   (if-let [errors (v/validate-create-user user)]
     (do
       (log/error "error creating user:" errors)
       (bad-request {:error "invalid user"}))
-    (db/insert-user<!
+    (db/put-record! file-db :user
       (-> user
           (dissoc :pass-confirm)
           (update-in [:pass] hashers/encrypt)))))
@@ -85,29 +84,27 @@
     (ok
       {:user
        (if pass
-         (db/update-user-with-pass<!
+         (db/put-record! file-db :user
            (-> user
                (dissoc :pass-confirm)
                (update :pass hashers/encrypt)))
-         (db/update-user<! user))})))
+         (db/put-record! user))})))
 
 (defn local-login [userid pass]
-  (if (:production env)
-    (when-let [user (authenticate-local userid pass)]
-      (-> user
-          (merge {:member-of    []
-                  :account-name userid})))
-    {:user-id 1, :screenname "admin", :admin true, :last-login #inst "2017-05-16T17:26:27.911-00:00", :is-active true :member-of [] :account-name userid}))
+  (when-let [user (authenticate-local userid pass)]
+    (-> user
+        (merge {:member-of    []
+                :account-name userid}))))
 
 (defn ldap-login [userid pass]
   (when-let [user (authenticate-ldap userid pass)]
-    (-> user
+    (as-> user x
         ;; user :screenname as preferred name
         ;; fall back to userid if not supplied
-        (assoc :admin false
-               :is-active true)
-        (update-in [:screenname] #(or (not-empty %) userid))
-        (db/update-user-info!))))
+      (assoc x :admin false
+             :is-active true)
+      (update-in x [:screenname] #(or (not-empty %) userid))
+      (db/put-record! file-db :user x))))
 
 (defn login [userid pass {:keys [remote-addr server-name session]}]
   (if-let [user (if (:ldap env)

@@ -1,179 +1,85 @@
 (ns db-devops.db.core
-  (:require
-    [cheshire.core :refer [generate-string parse-string]]
-    [clojure.java.jdbc :as jdbc]
-    [clojure.set :refer [difference]]
-    [clojure.walk :refer [postwalk]]
-    [conman.core :as conman]
-    [cuerdas.core :as string]
-    [mount.core :refer [defstate]]
-    [db-devops.config :refer [env]])
-  (:import org.postgresql.util.PGobject
-           java.sql.Array
-           clojure.lang.IPersistentMap
-           clojure.lang.IPersistentVector
-           [java.sql
-            Date
-            Timestamp
-            PreparedStatement]))
+  "Utilities to db, record and look up based on file "
+  (:require [clojure.edn :as edn]
+            [clojure.tools.logging :as log]
+            [db-devops.config :refer [env]]
+            [mount.core :refer [defstate]]
+            [db-devops.db.user :refer [default-user]]
+            [db-devops.db.checklist :refer [default-checklist]]
+            [db-devops.db.verification :refer [default-verification]]))
 
-(defstate ^:dynamic *db*
-  :start (if (:production env) (conman/connect! {:jdbc-url (env :database-url)}))
-  :stop (if (:production env) (conman/disconnect! *db*)))
+;; db
 
-(conman/bind-connection *db*
-                        "sql/issues.sql"
-                        "sql/tags.sql"
-                        "sql/users.sql"
-                        "sql/attachments.sql")
 
-(defn ->kebab-case-keyword* [k]
-  (-> (reduce
-        (fn [s c]
-          (if (and
-                (not-empty s)
-                (Character/isLowerCase (last s))
-                (Character/isUpperCase c))
-            (str s "-" c)
-            (str s c)))
-        "" (name k))
-      (string/replace #"[\s]+" "-")
-      (.replaceAll "_" "-")
-      (.toLowerCase)
-      (keyword)))
+;; schema
 
-(def ->kebab-case-keyword (memoize ->kebab-case-keyword*))
+;; define a function to delete from a vector at a specified position
+(defn delete-element [vc pos]
+  (vec (concat
+        (subvec vc 0 pos)
+        (subvec vc (inc pos)))))
 
-(defn transform-keys [t coll]
-  "Recursively transforms all map keys in coll with t."
-  (letfn [(transform [[k v]] [(t k) v])]
-    (postwalk (fn [x] (if (map? x) (into {} (map transform x)) x)) coll)))
+;; db method
+(defn get-records [db table] @(get db table))
+(defn get-record-by-index [db table ii] (nth @(get db table) ii))
+(defn put-record-by-index! [db table i v] (swap! (get db table) assoc i v))
+(defn remove-record-by-index! [db table i] (swap! (get db table) delete-element i))
+(defn get-index-by-id [db table id]
+  (let [table-with-i (map-indexed vector @(get db table))]
+    (some #(when (= id (:checklist-id (second %))) (first %)) table-with-i)))
 
-(defn result-one-snake->kebab
-  [this result options]
-  (->> (hugsql.adapter/result-one this result options)
-       (transform-keys ->kebab-case-keyword)))
+(defn get-record-by-field [db table field-name field-value]
+  (let [table-with-i (map-indexed vector @(get db table))]
+    (some #(when (= field-value (get (second %) field-name)) (second %)) table-with-i)))
 
-(defn result-many-snake->kebab
-  [this result options]
-  (->> (hugsql.adapter/result-many this result options)
-       (map #(transform-keys ->kebab-case-keyword %))))
+(defn get-record-by-two-field [db table first-field-name first-field-value second-field-name second-field-value]
+  (some #(when (and (= (get % first-field-name) first-field-value) (= (get % second-field-name) second-field-value)) %) @(get db table)))
 
-(defmethod hugsql.core/hugsql-result-fn :1 [sym]
-  'db-devops.db.core/result-one-snake->kebab)
+;; create or update record
+(defmulti put-record! (fn [db table v] (:id v)))
+;; create
+(defmethod put-record! nil [db table v]
+  (let [db-v @(get db table)
+        id-for-new (inc (apply max (map #(:id %) db-v)))]
+    (put-record-by-index! db table (count db-v) (assoc v :id id-for-new))))
+;; update
+(defmethod put-record! :default [db table v]
+  (let [existing-record-i (get-index-by-id db table (:id v))]
+    (put-record-by-index! db table existing-record-i v)))
 
-(defmethod hugsql.core/hugsql-result-fn :* [sym]
-  'db-devops.db.core/result-many-snake->kebab)
+(defn dump-to-path
+  "Store a value's representation to a given path"
+  [path value]
+  (spit path (pr-str value)))
 
-(defn deserialize [pgobj]
-  (let [type  (.getType pgobj)
-        value (.getValue pgobj)]
-    (case type
-      "record" (some-> value (subs 1 (dec (count value))) (.split ",") vec)
-      "json" (parse-string value true)
-      "jsonb" (parse-string value true)
-      "citext" (str value)
-      value)))
+(defn load-from-path
+  "Load a value from its representation stored in a given path.
+   When reading fails, yield nil"
+  [path]
+  (try
+    (edn/read-string (slurp path))
+    (catch Exception ex
+      (log/error (or (ex-data ex) (.getMessage ex))))))
 
-(defn to-date [^java.sql.Date sql-date]
-  (-> sql-date (.getTime) (java.util.Date.)))
+(defn persist-fn
+  "Yields an atom watch-fn that dumps new states to a path"
+  [path]
+  (fn [_ _ _ state]
+    (dump-to-path path state)))
 
-(extend-protocol jdbc/IResultSetReadColumn
-  Date
-  (result-set-read-column [v _ _] (to-date v))
+(defn make-table
+   "An atom that loads its initial state from a file and persists each new state
+    to the same path. If file not found, use default. One file for one table."
+  [ms]
+  (let [table (key ms)
+        {:keys [path default]} (val ms)
+        init  (or (load-from-path path) (var-get (resolve default)))
+        state (atom init)]
+    (add-watch state :persist-watcher (persist-fn path))
+    {table state}))
 
-  Timestamp
-  (result-set-read-column [v _ _] (to-date v))
+(defn make-db [env]
+  (let [tables (get-in env [:storage :file])]
+    (reduce merge (map make-table tables))))
 
-  Array
-  (result-set-read-column [v _ _]
-    (->> (.getArray v)
-         (map #(if (instance? PGobject %)
-                (deserialize %) %))
-         (remove nil?)
-         (vec)))
-
-  PGobject
-  (result-set-read-column [pgobj _metadata _index]
-    (deserialize pgobj)))
-
-(extend-type java.util.Date
-  jdbc/ISQLParameter
-  (set-parameter [v ^PreparedStatement stmt ^long idx]
-    (.setTimestamp stmt idx (Timestamp. (.getTime v)))))
-
-(defn to-pg-json [value]
-  (doto (PGobject.)
-    (.setType "jsonb")
-    (.setValue (generate-string value))))
-
-(extend-type clojure.lang.IPersistentVector
-  jdbc/ISQLParameter
-  (set-parameter [v ^java.sql.PreparedStatement stmt ^long idx]
-    (let [conn      (.getConnection stmt)
-          meta      (.getParameterMetaData stmt)
-          type-name (.getParameterTypeName meta idx)]
-      (if-let [elem-type (when (= (first type-name) \_) (apply str (rest type-name)))]
-        (.setObject stmt idx (.createArrayOf conn elem-type (to-array v)))
-        (.setObject stmt idx (to-pg-json v))))))
-
-(extend-protocol jdbc/ISQLValue
-  IPersistentMap
-  (sql-value [value] (to-pg-json value))
-  IPersistentVector
-  (sql-value [value] (to-pg-json value)))
-
-(defn support-issue [m]
-  (conman/with-transaction [*db*]
-    (when-let [issue (not-empty (support-issue* m))]
-      (-> issue
-          (update :tags distinct)
-          (update :files distinct)
-          (merge (inc-issue-views<! m))))))
-
-(defn create-missing-tags [issue-tags]
-  (let [current-tags (map :tag (tags))]
-    (doseq [tag (difference (set issue-tags)
-                            (set current-tags))]
-      (create-tag<! {:tag tag}))))
-
-(defn reset-issue-tags! [support-issue-id tags]
-  (create-missing-tags tags)
-  (dissoc-tags-from-issue!
-    {:support-issue-id support-issue-id})
-  (assoc-tags-with-issue!
-    {:support-issue-id support-issue-id
-     :tags             tags}))
-
-(defn create-issue-with-tags! [{:keys [tags] :as issue}]
-  (conman/with-transaction [*db*]
-    (let [support-issue-id (:support-issue-id
-                             (add-issue<! (dissoc issue :tags)))]
-      (reset-issue-tags! support-issue-id tags)
-      support-issue-id)))
-
-(defn update-issue-with-tags! [{:keys [support-issue-id tags] :as issue}]
-  (conman/with-transaction [*db*]
-    (reset-issue-tags! support-issue-id tags)
-    (update-issue! (dissoc issue :tags))))
-
-(defn dissoc-from-tags-and-delete-issue-and-files! [m]
-  (conman/with-transaction [*db*]
-    (delete-issue-files! m)
-    (dissoc-tags-from-issue! m)
-    (delete-issue! m)))
-
-(defn update-user-info! [{:keys [screenname pass admin is-active] :as user}]
-  (conman/with-transaction [*db*]
-    (merge
-      user
-      (if-let [{:keys [user-id]} (user-by-screenname {:screenname screenname})]
-        (update-user<! {:user-id    user-id
-                        :admin      admin
-                        :is-active  is-active
-                        :screenname screenname
-                        :pass       pass})
-        (insert-user<! {:screenname screenname
-                        :admin      admin
-                        :is-active  is-active
-                        :pass       pass})))))
+(defstate file-db :start (make-db env))

@@ -2,6 +2,12 @@
  :port 3000
  ;; when :nrepl-port is set the application starts the nREPL server on load
  :nrepl-port 7000
+ :storage {:file {:user {:path "/Users/chenjinfen/Desktop/projects/CMB/IMAVP/2017/db-devops/05-dev/db-devops/user.edn"
+                         :default db-devops.db.user/ALL-USER}
+                  :checklist {:path "/Users/chenjinfen/Desktop/projects/CMB/IMAVP/2017/db-devops/05-dev/db-devops/checklist.edn"
+                              :default db-devops.db.checklist/ALL-CHECKLIST}
+                  :verification {:path "/Users/chenjinfen/Desktop/projects/CMB/IMAVP/2017/db-devops/05-dev/db-devops/verification.edn"
+                                 :default db-devops.db.verification/ALL-VERIFICATION}}}
  :external-api {:remote-executor {:url "http://99.1.76.195/ngap/api/operation/rs6000/exec_command/ooflow"
                                   :script-home "/home/ooflow/scripts/middleware/db-upgrade"
                                   :auth-info ["ooflow" "ooflow"]}}}

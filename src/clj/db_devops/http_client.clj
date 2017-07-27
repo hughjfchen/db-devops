@@ -5,7 +5,6 @@
             [cheshire.core :refer :all]
             [db-devops.config :refer [env]]
             [db-devops.conditionhandling :refer :all]
-            [db-devops.db.checklist :as dbcl]
             [mount.core :refer [defstate]]))
 
 (def test-data {"get_aix_osinfo.py" "{\"nowtime\": \"2017-06-29 15.15.56\", \"numproc\": \"2\", \"pgspace\": \"1024\", \"memsize\": \"6144\", \"timezone\": \"Asia/Shanghai\", \"oslevel\": \"7100-02-07-1524\", \"clevel\": \"13.1.2.0\", \"jdklevel\": \"1.5.0\",

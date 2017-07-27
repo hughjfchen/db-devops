@@ -1,3 +1,9 @@
 {:test true
  :port 3001
- :nrepl-port 7001} ;; when :nrepl-port is set the application starts the nREPL server on load
+ :nrepl-port 7001
+ :storage {:file {:user "/Users/chenjinfen/Desktop/projects/CMB/IMAVP/2017/db-devops/05-dev/db-devops/user.edn"
+                  :checklist "/Users/chenjinfen/Desktop/projects/CMB/IMAVP/2017/db-devops/05-dev/db-devops/checklist.edn"
+                  :verification "/Users/chenjinfen/Desktop/projects/CMB/IMAVP/2017/db-devops/05-dev/db-devops/verification.edn"}}
+ :external-api {:remote-executor {:url "http://k.cmbchina.com/open/strategy/rs6000/exec_command"
+                                  :script-home "/home/nemo/scripts/change/midware_control/"
+                                  :auth-info ["ooflow" "ooflow"]}}}

@@ -2,7 +2,6 @@
   (:require [db-devops.handler :as handler]
             [luminus.repl-server :as repl]
             [luminus.http-server :as http]
-            [luminus-migrations.core :as migrations]
             [db-devops.config :refer [env]]
             [db-devops.http-client :refer [http-client]]
             [clojure.tools.cli :refer [parse-opts]]
@@ -57,7 +56,6 @@ repl-server
     (some #{"migrate" "rollback"} args)
     (do
       (mount/start #'db-devops.config/env)
-      (migrations/migrate args (select-keys env [:database-url]))
       (System/exit 0))
     :else
     (start-app args)))

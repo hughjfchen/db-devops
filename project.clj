@@ -3,19 +3,17 @@
   :description "A web app for DB DevOps."
   :url "https://github.com/hughjfchen/db-devops"
 
-  :dependencies [[ring/ring-core "1.6.1"]
+  :dependencies [[ring/ring-core "1.6.2"]
 		 [bouncer "1.0.1"]
                  [buddy "1.3.0"]
                  [cljs-ajax "0.6.0"]
-                 [com.andrewmcveigh/cljs-time "0.5.0"]
+                 [com.andrewmcveigh/cljs-time "0.5.1"]
                  [compojure "1.6.0"]
-                 [conman "0.6.6"]
                  [cprop "0.1.10"]
                  [funcool/cuerdas "2.0.3"]
                  [luminus-immutant "0.2.3"]
-                 [luminus-migrations "0.3.9"]
                  [luminus-nrepl "0.1.4"]
-                 [metosin/compojure-api "1.1.10"]
+                 [metosin/compojure-api "1.1.11"]
                  [metosin/ring-http-response "0.9.0"]
                  [clj-http "3.6.1"]
                  [im.chit/hara.event "2.5.10"]
@@ -26,7 +24,6 @@
                  [org.clojure/clojurescript "1.9.671" :scope "provided"]
                  [org.clojure/tools.cli "0.3.5"]
                  [org.clojure/tools.logging "0.4.0"]
-                 [org.postgresql/postgresql "42.1.1"]
                  [org.webjars.bower/tether "1.4.0"]
                  [org.webjars/bootstrap "3.3.6"]
                  [org.webjars/font-awesome "4.7.0"]
@@ -43,11 +40,10 @@
                  ;[reagent-utils "0.2.1"]
                  [ring-middleware-format "0.7.2"]
                  [ring-webjars "0.2.0"]
-                 [ring/ring-defaults "0.3.0"]
+                 [ring/ring-defaults "0.3.1"]
                  [secretary "1.2.3"]
-                 [selmer "1.10.8"]
-                 [venantius/accountant "0.2.0"]
-                 [com.ibm.db2.jcc/db2jcc4 "4.19.66"]]
+                 [selmer "1.10.9"]
+                 [venantius/accountant "0.2.0"]]
 
   :min-lein-version "2.0.0"
 
@@ -56,10 +52,8 @@
   :resource-paths ["resources" "target/cljsbuild"]
   :target-path "target/%s/"
   :main ^:skip-aot db-devops.core
-  :migratus {:store :database :db ~(get (System/getenv) "DATABASE_URL")}
 
   :plugins [[lein-cprop "1.0.1"]
-            [migratus-lein "0.4.1"]
             [lein-cljsbuild "1.1.3"]
             [lein-immutant "2.1.0"]]
   :clean-targets ^{:protect false}
@@ -103,7 +97,7 @@
                                  [figwheel-sidecar "0.5.11"]
                                  [pjstadig/humane-test-output "0.8.2"]
                                  [prone "1.1.4"]
-                                 [ring/ring-devel "1.6.1"]
+                                 [ring/ring-devel "1.6.2"]
                                  [ring/ring-mock "0.3.1"]]
                   :plugins      [[com.jakemccrary/lein-test-refresh "0.14.0"]
                                  [lein-doo "0.1.7"]
