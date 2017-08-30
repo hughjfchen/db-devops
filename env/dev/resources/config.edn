@@ -6,8 +6,11 @@
                          :default db-devops.db.user/ALL-USER}
                   :checklist {:path "/Users/chenjinfen/Desktop/projects/CMB/IMAVP/2017/db-devops/05-dev/db-devops/checklist.edn"
                               :default db-devops.db.checklist/ALL-CHECKLIST}
-                  :verification {:path "/Users/chenjinfen/Desktop/projects/CMB/IMAVP/2017/db-devops/05-dev/db-devops/verification.edn"
-                                 :default db-devops.db.verification/ALL-VERIFICATION}}}
+                  :verify {:path "/Users/chenjinfen/Desktop/projects/CMB/IMAVP/2017/db-devops/05-dev/db-devops/verification.edn"
+                           :default db-devops.db.verification/ALL-VERIFICATION}}}
  :external-api {:remote-executor {:url "http://99.1.76.195/ngap/api/operation/rs6000/exec_command/ooflow"
                                   :script-home "/home/ooflow/scripts/middleware/db-upgrade"
-                                  :auth-info ["ooflow" "ooflow"]}}}
+                                  :auth-info ["ooflow" "ooflow"]}
+                :upgrade-api {:url "http://localhost:8080"
+                              :script-home "/home/ooflow/scripts/middleware/db-upgrade"
+                              :auth-info ["ooflow" "ooflow"]}}}

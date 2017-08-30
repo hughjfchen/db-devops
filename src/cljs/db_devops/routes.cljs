@@ -27,15 +27,14 @@
 (defn home-page-events [& events]
   (.scrollTo js/window 0 0)
   (run-events (into
-                [[:load-tags]
-                 [:set-active-page :home]]
+               [[:set-active-page :home]]
                 events)))
 
 ;; -------------------------
 ;; Routes
 (secretary/defroute (context-url "/") []
-  (home-page-events [:select-tag "Recent"]
-                    [:load-recent-issues]))
+  (home-page-events [:load-checklist-tree]
+                    [:load-verification-tree]))
 
 (secretary/defroute (context-url "/search/:query") [query]
   (home-page-events [:search-for-issues query]))

@@ -22,18 +22,33 @@
 ;; db method
 (defn get-records [db table] @(get db table))
 (defn get-record-by-index [db table ii] (nth @(get db table) ii))
-(defn put-record-by-index! [db table i v] (swap! (get db table) assoc i v))
-(defn remove-record-by-index! [db table i] (swap! (get db table) delete-element i))
 (defn get-index-by-id [db table id]
   (let [table-with-i (map-indexed vector @(get db table))]
-    (some #(when (= id (:checklist-id (second %))) (first %)) table-with-i)))
+    (some #(when (= id (:id (second %))) (first %)) table-with-i)))
+(defn get-record-by-id [db table id]
+  (->> id
+       (get-index-by-id db table)
+       (get-record-by-index db table)))
+(defn put-record-by-index! [db table i v] (swap! (get db table) assoc i v))
+(defn remove-record-by-index! [db table i] (swap! (get db table) delete-element i))
+(defn remove-record-by-id! [db table id] (->> id
+                                              (get-index-by-id db table)
+                                              (swap! (get db table) delete-element)))
 
-(defn get-record-by-field [db table field-name field-value]
-  (let [table-with-i (map-indexed vector @(get db table))]
-    (some #(when (= field-value (get (second %) field-name)) (second %)) table-with-i)))
+(defn get-one-record-by-field [db table field-name field-value]
+  (some #(when (= field-value (get % field-name)) %) @(get db table)))
 
-(defn get-record-by-two-field [db table first-field-name first-field-value second-field-name second-field-value]
+(defn get-records-by-field [db table field-name field-value]
+  (filter #(= field-value (get % field-name)) @(get db table)))
+
+(defn get-one-record-by-two-field [db table first-field-name first-field-value second-field-name second-field-value]
   (some #(when (and (= (get % first-field-name) first-field-value) (= (get % second-field-name) second-field-value)) %) @(get db table)))
+
+(defn get-records-by-two-field [db table first-field-name first-field-value second-field-name second-field-value]
+  (filter #(and (= (get % first-field-name) first-field-value) (= (get % second-field-name) second-field-value)) @(get db table)))
+
+(defn get-records-by-pred [db table pred]
+  (filter pred @(get db table)))
 
 ;; create or update record
 (defmulti put-record! (fn [db table v] (:id v)))
@@ -41,11 +56,11 @@
 (defmethod put-record! nil [db table v]
   (let [db-v @(get db table)
         id-for-new (inc (apply max (map #(:id %) db-v)))]
-    (put-record-by-index! db table (count db-v) (assoc v :id id-for-new))))
+    (->> (put-record-by-index! db table (count db-v) (assoc v :id id-for-new)) (last))))
 ;; update
 (defmethod put-record! :default [db table v]
   (let [existing-record-i (get-index-by-id db table (:id v))]
-    (put-record-by-index! db table existing-record-i v)))
+    (-> (put-record-by-index! db table existing-record-i v) (nth existing-record-i))))
 
 (defn dump-to-path
   "Store a value's representation to a given path"

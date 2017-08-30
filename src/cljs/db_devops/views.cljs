@@ -8,6 +8,8 @@
             [db-devops.pages.home :refer [home-page]]
             [db-devops.pages.issues :refer [edit-issue-page view-issue-page]]
             [db-devops.pages.upgrade :refer [choose-type-page checklist-page upgrade-page verify-page]]
+            [db-devops.pages.checklist :refer [checklist-management-page]]
+            [db-devops.pages.checklist-edit :refer [checklist-edit-page]]
             [db-devops.pages.auth :refer [login-page logout]]))
 
 (defn upgrade-notifications []
@@ -39,6 +41,8 @@
     [sa/MenuItem
      {:on-click #(dispatch [:set-active-page :home])} "主页"]
     [sa/MenuItem
+     {:on-click #(dispatch [:create-db])} "创建"]
+    [sa/MenuItem
      {:on-click #(run-events [[:set-active-page :upgrade] [:set-active-upgrade-step :choose-type]])} "升级"]
     [sa/MenuItem
      {:on-click #(dispatch [:set-active-page :rollback])} "回退"]
@@ -51,7 +55,9 @@
          [sa/DropdownItem
           {:on-click #(dispatch [:set-active-page :users])} "用户管理"]
          [sa/DropdownItem
-          {:on-click identity} "检查项管理"]]]])
+          {:on-click #(run-events [[:load-checklist-management :checklist] [:set-active-page :checklist-management]])} "检查项管理"]
+         [sa/DropdownItem
+          {:on-click #(run-events [[:load-checklist-management :verify] [:set-active-page :checklist-management]])} "校验项管理"]]]])
     [sa/MenuItem
      [sa/Dropdown
       {:text screenname}
@@ -91,6 +97,14 @@
 (defmethod pages :checklist [_ _]
   (.scrollTo js/window 0 0)
   [checklist-page])
+(defmethod pages :checklist-management [_ _]
+  ;(.scrollTo js/window 0 0)
+  [checklist-management-page])
+(defmethod pages :edit-checklist [_ _]
+  [checklist-edit-page])
+;(defmethod pages :verification-management [_ _]
+;  (.scrollTo js/window 0 0)
+;  [verification-management-page])
 (defmethod pages :upgrade [_ _]
   ;(.scrollTo js/window 0 0)
   [upgrade-page])

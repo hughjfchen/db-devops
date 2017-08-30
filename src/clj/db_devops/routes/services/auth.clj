@@ -35,7 +35,7 @@
       (finally (client/release-connection ldap-pool conn)))))
 
 (defn authenticate-local [userid pass]
-  (when-let [user (db/get-record-by-field file-db :user :screenname userid)]
+  (when-let [user (db/get-one-record-by-field file-db :user :screenname userid)]
     (when (hashers/check pass (:pass user))
       (dissoc user :pass))))
 
@@ -64,7 +64,7 @@
 (handler find-users [screenname]
   (ok
     {:users
-     (db/get-record-by-field file-db :user :screenname (str "%" screenname "%"))}))
+     (db/get-one-record-by-field file-db :user :screenname (str "%" screenname "%"))}))
 
 (handler register! [user]
   (if-let [errors (v/validate-create-user user)]
