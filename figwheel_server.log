@@ -16660,3 +16660,9 @@ notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/v
 [0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
 [32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.893 seconds.[0m
 notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/create_db.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 14.293 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/auth.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.959 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/auth.js

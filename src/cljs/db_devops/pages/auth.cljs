@@ -43,18 +43,18 @@
        [sa/ModalContent
         (if @error
           [sa/Label @error])
-        [sa/Form {:horizontal true}
+        [sa/Form
          [sa/FormGroup
-          [sa/FormField {:class "text-right" :sm 4} [sa/Label "用户名"]]
-          [sa/FormField {:sm 6}
+          [sa/FormField [sa/Label "用户名"]]
+          [sa/FormField
            [:input.form-control
             {:type      "text"
              :value     (or (:userid @params) "")
              :on-change #(swap! params assoc :userid (-> % .-target .-value))
              :on-key-up on-key-up}]]]
          [sa/FormGroup
-          [sa/FormField {:class "text-right" :sm 4} [sa/Label "密码"]]
-          [sa/FormField {:sm 6}
+          [sa/FormField [sa/Label "密码"]]
+          [sa/FormField
            [:input.form-control
             {:type      "password"
              :value     (or (:pass @params) "")
