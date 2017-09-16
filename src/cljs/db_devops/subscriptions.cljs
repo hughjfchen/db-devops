@@ -9,7 +9,11 @@
 (defn query [db [event-id]]
   (event-id db))
 
+(reg-sub :checklist-result query)
+
 (reg-sub :active-page query)
+
+(reg-sub :failed-checklist query)
 
 (reg-sub :active-upgrade-step query)
 
@@ -48,6 +52,20 @@
 (reg-sub :error query)
 
 (reg-sub :login-events query)
+
+(reg-sub :task-output query)
+
+(reg-sub :all-task-names query)
+
+(reg-sub :task-info query)
+
+(reg-sub :task-alias-records query)
+
+(reg-sub :delete-task-result query)
+
+(reg-sub :active-phase-one-step query)
+
+(reg-sub :associative-task-list-ui/current-task query)
 
 ;;admin
 (reg-sub :admin/users query)

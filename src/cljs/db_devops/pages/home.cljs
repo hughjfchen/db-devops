@@ -4,7 +4,6 @@
             [soda-ash.core :as sa]
             [db-devops.pages.common :refer [main-content-layout panel-header]]
             [db-devops.pages.upgrade :refer [choose-type-page checklist-page upgrade-page verify-page]]
-            [db-devops.key-events :refer [on-enter]]
             [db-devops.routes :refer [href navigate!]]
             [db-devops.highcharts :as hc]))
 

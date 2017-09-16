@@ -4,7 +4,7 @@
             [db-devops.db :as db]
             db-devops.handlers.admin
             db-devops.handlers.upgrade
-            db-devops.handlers.tags))
+            db-devops.handlers.phase-one-api))
 
 (reg-event-db
   :initialize-db

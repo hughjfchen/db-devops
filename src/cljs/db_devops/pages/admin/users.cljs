@@ -1,7 +1,6 @@
 (ns db-devops.pages.admin.users
   (:require [soda-ash.core :as sa]
             [re-frame.core :refer [dispatch subscribe]]
-            [db-devops.key-events :refer [on-enter]]
             [db-devops.pages.common :refer [validation-modal]]
             [db-devops.validation :as v]
             [reagent.core :as r]))
@@ -16,8 +15,7 @@
        {:type        "text"
         :class       "input-sm"
         :placeholder "Type in a user name to see their details"
-        :on-change   #(reset! search (-> % .-target .-value))
-        :on-key-down #(on-enter % do-search)}]
+        :on-change   #(reset! search (-> % .-target .-value))}]
       [sa/FormGroup
        [:button.btn.btn-sm.btn-default
         {:on-click do-search}

@@ -15,7 +15,7 @@
 (defn login [params error on-close]
   (reset! error nil)
   (let [{:keys [userid pass]} @params]
-    (if (or (string/blank? userid) (string/blank? pass))
+    (if (or (clojure.string/blank? userid) (clojure.string/blank? pass))
       (reset! error "Username and password cannot be blank.")
       (POST "/api/login"
             {:params        {:userid userid :pass pass}
@@ -42,7 +42,7 @@
        [sa/ModalHeader "登录"]
        [sa/ModalContent
         (if @error
-          [sa/Label {:bs-style "danger"} @error])
+          [sa/Label @error])
         [sa/Form {:horizontal true}
          [sa/FormGroup
           [sa/FormField {:class "text-right" :sm 4} [sa/Label "用户名"]]
@@ -61,4 +61,4 @@
              :on-change #(swap! params assoc :pass (-> % .-target .-value))
              :on-key-up on-key-up}]]]]]
        [sa/ModalActions
-        [:button.btn.btn-sm.btn-primary {:on-click #(login params error on-close)} "登录"]]])))
+        [sa/Button {:on-click #(login params error on-close)} "登录"]]])))

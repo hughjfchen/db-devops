@@ -10,7 +10,6 @@
 
 ;; db
 
-
 ;; schema
 
 ;; define a function to delete from a vector at a specified position

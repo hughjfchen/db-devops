@@ -5,11 +5,11 @@
             [soda-ash.core :as sa]
             [db-devops.routes :refer [context-url href navigate! run-events]]
             [db-devops.datetime :as dt]
-            [db-devops.attachments :refer [upload-form]]
             [db-devops.pages.common :refer [validation-modal confirm-modal main-content-layout panel-header]]
             [db-devops.routes :refer [href navigate!]]
             [db-devops.validation :as v]
-            [re-frame-datatable.core :as rdt]))
+            [re-frame-datatable.core :as rdt]
+            [re-frame-datatable.views :as rdtviews]))
 
 (defn checklist-table [dt-id data-sub-vector]
   [rdt/datatable
@@ -85,7 +85,7 @@
                                                                            :comply-suggestion ""
                                                                            }]
                                          [:tr [:th {:col-span 8} [sa/Button {:on-click #(run-events [[:edit-checklist (assoc default-new-checklist :step @checklist-step)] [:set-active-page :edit-checklist]])} "新建"]]]))
-    ::rdt/footer-component (fn [] [:tr [:th {:col-span 8} [rdt/default-pagination-controls dt-id data-sub-vector]]])}])
+    ::rdt/footer-component (fn [] [:tr [:th {:col-span 8} [rdtviews/default-pagination-controls dt-id data-sub-vector]]])}])
 
 (defn checklist-panel []
   [sa/Segment

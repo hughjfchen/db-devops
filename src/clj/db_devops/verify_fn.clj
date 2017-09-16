@@ -72,7 +72,7 @@
 (defn verify-fn-compare-eq[cl s t & rest]
   (let [source-result (get-in cl [:execute :output :result :source])
         target-result (get-in cl [:execute :output :result :target])]
-    (if (and (not-empty source-result) (not-empty target-result))
+    (if (and (not (nil? source-result)) (not (nil? target-result)))
       (= source-result target-result))))
 
 (defn verify-fn-compare-gt[cl s t & rest]

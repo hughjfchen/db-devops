@@ -6,11 +6,14 @@
             [db-devops.pages.common :refer [loading-throbber error-modal]]
             [db-devops.pages.admin.users :refer [users-page]]
             [db-devops.pages.home :refer [home-page]]
-            [db-devops.pages.issues :refer [edit-issue-page view-issue-page]]
             [db-devops.pages.upgrade :refer [choose-type-page checklist-page upgrade-page verify-page]]
             [db-devops.pages.checklist :refer [checklist-management-page]]
             [db-devops.pages.checklist-edit :refer [checklist-edit-page]]
+            [db-devops.pages.create-db :refer [create-db-page]]
+            [db-devops.pages.create-tb :refer [create-tb-page]]
+            [db-devops.pages.rollback :refer [rollback-page]]
             [db-devops.pages.auth :refer [login-page logout]]))
+
 
 (defn upgrade-notifications []
   (r/with-let [upgrade-notifications (subscribe [:notifications])]
@@ -41,7 +44,13 @@
     [sa/MenuItem
      {:on-click #(dispatch [:set-active-page :home])} "主页"]
     [sa/MenuItem
-     {:on-click #(dispatch [:create-db])} "创建"]
+     [sa/Dropdown
+      {:text "创建"}
+      [sa/DropdownMenu
+       [sa/DropdownItem
+        {:on-click #(dispatch [:set-active-page :create-db])} "创建数据库"]
+       [sa/DropdownItem
+        {:on-click #(dispatch [:set-active-page :create-tb])} "创建表"]]]]
     [sa/MenuItem
      {:on-click #(run-events [[:set-active-page :upgrade] [:set-active-upgrade-step :choose-type]])} "升级"]
     [sa/MenuItem
@@ -85,12 +94,6 @@
   (if (:admin user)
     [users-page]
     (navigate! "/")))
-(defmethod pages :edit-issue [_ _]
-  (.scrollTo js/window 0 0)
-  [edit-issue-page])
-(defmethod pages :view-issue [_ _]
-  (.scrollTo js/window 0 0)
-  [upgrade-page])
 (defmethod pages :choose-type [_ _]
   (.scrollTo js/window 0 0)
   [choose-type-page])
@@ -111,6 +114,15 @@
 (defmethod pages :verify [_ _]
   (.scrollTo js/window 0 0)
   [verify-page])
+(defmethod pages :create-db [_ _]
+  (.scrollTo js/window 0 0)
+  [create-db-page])
+(defmethod pages :create-tb [_ _]
+  (.scrollTo js/window 0 0)
+  [create-tb-page])
+(defmethod pages :rollback [_ _]
+  (.scrollTo js/window 0 0)
+  [rollback-page])
 (defmethod pages :default [_ _] [:div])
 
 (defn main-page []

@@ -157,67 +157,68 @@
     ;; upgrade-api-client
     (POST "/upgrade-api-submit-operation-createdb" []
           :body-params [m :- uac/CreateDBRequest]
-          :return s/Num
+          :return s/Str
           :summary "Call upgrade api - submitOperation"
           (uac/call-upgrade-api :submitOperation m))
 
     (POST "/upgrade-api-submit-operation-createtsk" []
           :body-params [m :- uac/CreateTSKRequest]
-          :return s/Num
+          :return s/Str
           :summary "Call upgrade api - submitOperation"
           (uac/call-upgrade-api :submitOperation m))
 
     (POST "/upgrade-api-submit-operation-checkdb" []
           :body-params [m :- uac/CheckDBRequest]
-          :return s/Num
+          :return s/Str
           :summary "Call upgrade api - submitOperation"
           (uac/call-upgrade-api :submitOperation m))
 
     (POST "/upgrade-api-submit-operation-createtb" []
           :body-params [m :- uac/CreateTBRequest]
-          :return s/Num
+          :return s/Str
           :summary "Call upgrade api - submitOperation"
           (uac/call-upgrade-api :submitOperation m))
 
     (POST "/upgrade-api-submit-operation-initcdc" []
           :body-params [m :- uac/InitCDCRequest]
-          :return s/Num
+          :return s/Str
           :summary "Call upgrade api - submitOperation"
           (uac/call-upgrade-api :submitOperation m))
 
     (POST "/upgrade-api-submit-operation-freshnbu" []
           :body-params [m :- uac/FreshNBURequest]
-          :return s/Num
+          :return s/Str
           :summary "Call upgrade api - submitOperation"
           (uac/call-upgrade-api :submitOperation m))
 
     (POST "/upgrade-api-submit-operation-freshlocal" []
           :body-params [m :- uac/FreshLocalRequest]
-          :return s/Num
+          :return s/Str
           :summary "Call upgrade api - submitOperation"
           (uac/call-upgrade-api :submitOperation m))
 
     (POST "/upgrade-api-submit-operation-completefresh" []
           :body-params [m :- uac/CompleteFreshRequest]
-          :return s/Num
+          :return s/Str
           :summary "Call upgrade api - submitOperation"
           (uac/call-upgrade-api :submitOperation m))
 
     (POST "/upgrade-api-submit-operation-deletecdc" []
           :body-params [m :- uac/DeleteCDCRequest]
-          :return s/Num
+          :return s/Str
           :summary "Call upgrade api - submitOperation"
           (uac/call-upgrade-api :submitOperation m))
 
     (GET "/upgrade-api-get-tasks/:funcid" []
          :path-params [funcid :- uac/funcid]
+         :query-params [user_id :- s/Str]
          :return [uac/TaskInfo]
          :summary "Call upgrade api - submitOperation"
-         (uac/call-upgrade-api :getTasks {:funcid funcid}))
+         (uac/call-upgrade-api :getTasks {:funcid funcid :user_id user_id}))
 
     (GET "/upgrade-api-get-event-result/:taskid" []
-         :path-params [taskid :- s/Num]
-         :return (s/maybe s/Str)
+         :path-params [taskid :- s/Str]
+         :return s/Str
          :summary "Call upgrade api - submitOperation"
          (uac/call-upgrade-api :getEventResult {:taskid taskid}))
 

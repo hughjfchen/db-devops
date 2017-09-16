@@ -36,41 +36,6 @@
   (home-page-events [:load-checklist-tree]
                     [:load-verification-tree]))
 
-(secretary/defroute (context-url "/search/:query") [query]
-  (home-page-events [:search-for-issues query]))
-
-(secretary/defroute (context-url "/all-issues") []
-  (home-page-events [:select-tag "All"]
-                    [:load-all-issues]))
-
-(secretary/defroute (context-url "/recent-issues") []
-  (home-page-events [:select-tag "Recent"]
-                    [:load-recent-issues]))
-
-(secretary/defroute (context-url "/most-viewed-issues") []
-  (home-page-events [:select-tag "Most Viewed"]
-                    [:load-most-viewed-issues]))
-
-(secretary/defroute (context-url "/issues/:tag") [tag]
-  (home-page-events [:select-tag tag]
-                    [:load-issues-for-tag tag]))
-
-(secretary/defroute (context-url "/create-issue") []
-  (dispatch-sync [:close-issue])
-  (run-events
-    [[:load-tags]
-     [:set-active-page :edit-issue]]))
-
-(secretary/defroute (context-url "/edit-issue") []
-  (if-not (or (logged-in?)
-              (nil? @(subscribe [:issue])))
-    (navigate! "/")
-    (dispatch [:set-active-page :edit-issue])))
-
-(secretary/defroute (context-url "/issue/:id") [id]
-  (run-events [[:load-tags]
-               [:load-and-view-issue (js/parseInt id)]]))
-
 (secretary/defroute (context-url "/users") []
   (run-events [[:set-active-page :users]]))
 

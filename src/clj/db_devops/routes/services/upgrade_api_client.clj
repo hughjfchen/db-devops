@@ -10,6 +10,9 @@
 
 (def funcid (s/enum :CreateDB :CreateTSK :CreateTB :CheckDB :InitCDC :FreshNBU :FreshLocal :CompleteFresh :DeleteCDC))
 
+(def user {(s/optional-key :user_id) s/Str
+           (s/optional-key :user_name) s/Str})
+
 (def AliasRecord {:RECORDID s/Num
                   :SRCHOSTNAME s/Str
                   :SRCHOSTIP s/Str
@@ -35,83 +38,96 @@
                   (s/optional-key :DB2LEVEL) (s/maybe s/Str)
                   (s/optional-key :SRCVERSION) (s/maybe s/Str)})
 
-(def TaskInfo {:POSTTASKNAME s/Str
+(def TaskInfo {:TASKNAME s/Str
                :CURSTEP s/Str
-               :PROCSTATUS s/Str
-               :BACKUPSTATUS s/Str
-               :RESTORESTATUS s/Str})
+               :PROCSTATUS s/Num
+               :BACKUPSTATUS (s/maybe s/Str)
+               :RESTORESTATUS (s/maybe s/Str)
+               :USERID s/Str})
 
 (def CreateDBRequest
-  {:inputParams {:HOSTNAME s/Str
-                 :USERINFO s/Str
-                 :DBNAME s/Str
-                 :DBDATA s/Str
-                 :DISKLIST s/Str
-                 :ItilID s/Str
-                 :CODEPAGE s/Str
-                 :CHECK s/Str
-                 :DB2VER s/Str
-                 :NODENUM s/Num
-                 :SYS s/Bool
-                 :FS s/Bool
-                 :USER s/Bool
-                 :INST s/Bool
-                 :DBM s/Bool
-                 :DB s/Bool
-                 :INSTDB2PATH s/Str
-                 :DB2PATH s/Str}
-   :funcid funcid})
+  (-> {:inputParams {:HOSTNAME s/Str
+                     :USERINFO s/Str
+                     :DBNAME s/Str
+                     :DBDATA s/Str
+                     (s/optional-key :DISKLIST) s/Str
+                     (s/optional-key :ItilID) s/Str
+                     (s/optional-key :CODEPAGE) s/Str
+                     (s/optional-key :CHECK) s/Str
+                     (s/optional-key :DB2VER) s/Str
+                     (s/optional-key :NODENUM) s/Num
+                     (s/optional-key :SYS) s/Bool
+                     (s/optional-key :FS) s/Bool
+                     (s/optional-key :USER) s/Bool
+                     (s/optional-key :INST) s/Bool
+                     (s/optional-key :DBM) s/Bool
+                     (s/optional-key :DB) s/Bool
+                     (s/optional-key :DB2PATH) s/Str}
+       :funcid funcid}
+      (merge user)))
 
 (def CreateTSKRequest
-  {:inputParams [{:SRCHOSTNAME s/Str
-                  :SRCINSTANCENAME s/Str
-                  :SRCPORT s/Num
-                  :SRCHOSTIP s/Str
-                  :SRCDBNAME s/Str
-                  :TGHOSTNAME s/Str
-                  :TGINSTANCENAME s/Str
-                  :TGPORT s/Num
-                  :TGHOSTIP s/Str
-                  :TGDBNAME s/Str}]
-   :inputParam {:POSTTASKNAME s/Str}
-   :funcid funcid})
+  (-> {:inputParams [{:SRCHOSTNAME s/Str
+                      :SRCINSTANCENAME s/Str
+                      :SRCPORT s/Str
+                      :SRCHOSTIP s/Str
+                      :SRCDBNAME s/Str
+                      :TGHOSTNAME s/Str
+                      :TGINSTANCENAME s/Str
+                      :TGPORT s/Str
+                      :TGHOSTIP s/Str
+                      :TGDBNAME s/Str}]
+       :inputParam {:POSTTASKNAME s/Str}
+       :funcid funcid}
+      (merge user)))
 
 (def CheckDBRequest
-  {:inputParam TaskInfo
-   :dbParams [AliasRecord]
-   :funcid funcid})
+  (-> {:inputParam TaskInfo
+       :dbParams [AliasRecord]
+       :funcid funcid}
+      (merge user)))
 
 (def CreateTBRequest
-  {:inputParam TaskInfo
-   :dbParams [AliasRecord]
-   :funcid funcid})
+  (-> {:inputParam {:SRCHOSTNAME s/Str
+                    :SRCINSTANCENAME s/Str
+                    :SRCDBNAME s/Str
+                    :TGHOSTNAME s/Str
+                    :TGINSTANCENAME s/Str
+                    :TGDBNAME s/Str}
+       :funcid funcid}
+      (merge user)))
 
 (def InitCDCRequest
-  {:inputParam TaskInfo
-   :dbParams [(-> AliasRecord
-                  (assoc :FORWARD s/Bool)
-                  (assoc :REVERSE s/Bool))]
-   :funcid funcid})
+  (-> {:inputParam TaskInfo
+       :dbParams [(-> AliasRecord
+                      (assoc :FORWARD s/Bool)
+                      (assoc :REVERSE s/Bool))]
+       :funcid funcid}
+      (merge user)))
 
 (def FreshNBURequest
-  {:inputParam TaskInfo
-   :dbParams [AliasRecord]
-   :funcid funcid})
+  (-> {:inputParam TaskInfo
+       :dbParams [AliasRecord]
+       :funcid funcid}
+      (merge user)))
 
 (def FreshLocalRequest
-  {:inputParam TaskInfo
-   :dbParams [AliasRecord]
-   :funcid funcid})
+  (-> {:inputParam TaskInfo
+       :dbParams [AliasRecord]
+       :funcid funcid}
+      (merge user)))
 
 (def CompleteFreshRequest
-  {:inputParam TaskInfo
-   :dbParams [AliasRecord]
-   :funcid funcid})
+  (-> {:inputParam TaskInfo
+       :dbParams [AliasRecord]
+       :funcid funcid}
+      (merge user)))
 
 (def DeleteCDCRequest
-  {:inputParam TaskInfo
-   :dbParams [AliasRecord]
-   :funcid funcid})
+  (-> {:inputParam TaskInfo
+       :dbParams [AliasRecord]
+       :funcid funcid}
+      (merge user)))
 
 (handler call-upgrade-api [api-key m]
          (ok (uac/call-upgrade-api api-key m)))

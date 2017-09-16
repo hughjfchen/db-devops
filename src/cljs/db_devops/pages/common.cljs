@@ -6,14 +6,9 @@
 (defn loading-throbber
   []
   (let [loading? (subscribe [:loading?])]
-    (when @loading?
-      [sa/Modal
-       {:show true}
-       [sa/ModalContent
-        [:div.spinner
-         [:div.bounce1]
-         [:div.bounce2]
-         [:div.bounce3]]]])))
+    [sa/Segment
+     [sa/Dimmer {:active @loading?}
+      [sa/Loader "操作进行中。。。"]]]))
 
 (defn error-modal []
   (when-let [error @(subscribe [:error])]
@@ -22,7 +17,7 @@
      [sa/ModalContent
       [:p error]]
      [sa/ModalActions
-      [:button.btn.btn-sm.btn-danger
+      [sa/Button
        {:on-click #(dispatch [:set-error] nil)}
        "确认"]]]))
 
@@ -35,7 +30,7 @@
        ^{:key error}
        [:li error])]]
    [sa/ModalActions
-    [:button.btn.btn-sm.btn-danger
+    [sa/Button
      {:on-click #(reset! errors nil)}
      "关闭"]]])
 
@@ -43,11 +38,11 @@
   [sa/Modal {:show @confirm-open?}
    [sa/ModalHeader title]
    [sa/ModalActions
-    [:div.btn-toolbar
-     [:button.btn.btn-sm.btn-danger
+    [sa/ButtonGroup
+     [sa/Button
       {:on-click #(reset! confirm-open? false)}
       "取消"]
-     [:button.btn.btn-sm.btn-success
+     [sa/Button
       {:on-click #(do
                    (reset! confirm-open? false)
                    (action))}
@@ -67,3 +62,17 @@
 (defn panel-header [header]
   [sa/Header
    {:size "huge"} header])
+
+(defn ui-input-field [label value-atom value-path validate-fn validate-atom on-change-fn]
+  [sa/FormField
+   (when-not (clojure.string/blank? label) [sa/Label label])
+   [:input {:value (get-in @value-atom value-path)
+            :on-blur #(swap! validate-atom assoc value-path
+                             (as-> @value-atom $
+                               (validate-fn $)
+                               (first $)
+                               (get-in $ value-path)
+                               (not-empty $)))
+            :on-change on-change-fn}]
+   (if (get @validate-atom value-path)
+     [sa/Label {:color "red" :pointing true} (get @validate-atom value-path)])])

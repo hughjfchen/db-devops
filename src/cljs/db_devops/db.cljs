@@ -2,7 +2,6 @@
 
 (def default-db
   {:user         (js->clj js/user :keywordize-keys true)
-   :selected-tag "Recent"
    :active-page  (when-not js/user :login)
    :active-upgrade-step :choose-type
    :chosen-type {:local false :cdc true :other false}
@@ -12,6 +11,7 @@
    :checklist-tree []
    :verification-tree []
    :active-verify-path [:db-check :db-status]
+   :failed-checklist []
    :notifications []
    :selected-notification []
    :login-events []})

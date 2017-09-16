@@ -57,7 +57,6 @@
       (dissoc :description)
       (update-in [:execute] dissoc :script-name :input)
       (update-in [:execute :output] dissoc :field-path)
-      (dissoc :comply-suggestion)
       (dissoc :update-date)
       (dissoc :update-by)
       (dissoc :type)
@@ -136,10 +135,11 @@
                final-result (if (= number-of-failure 0) true false)]
            (ok {:checklist final-cl :final-result final-result :number-of-failure number-of-failure})))
 
-;(checklist-by-cat {:current-path [:aix-check :system-config]
-;                   :chosen-type :cdc
-;                   :source {:machine "chenjf" :ip "10.10.10.10" :port 50000 :instance "instance1" :db "mydb1" :version "9.5"}
-;                   :target {:machine "chenjf" :ip "10.10.10.11" :port 50000 :instance "instance1" :db "mydb1" :version "10.5"}})
+;(:number-of-failure (:body (carry-out-checklist-by-cat {:current-path [:aix-check :system-config]
+;                                                        :chosen-type :cdc
+;                                                        :step :checklist
+;                                                        :source {:machine "chenjf" :ip "10.10.10.10" :port 50000 :instance "instance1" :db "mydb1" :version "9.5"}
+;                                                        :target {:machine "chenjf" :ip "10.10.10.11" :port 50000 :instance "instance1" :db "mydb1" :version "10.5"}})))
 
 (handler compute-checklist-cat-tree [m]
          (as-> m $

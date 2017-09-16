@@ -13,4 +13,479 @@
                                   :auth-info ["ooflow" "ooflow"]}
                 :upgrade-api {:url "http://localhost:8080"
                               :script-home "/home/ooflow/scripts/middleware/db-upgrade"
-                              :auth-info ["ooflow" "ooflow"]}}}
+                              :auth-info ["ooflow" "ooflow"]
+                              :spec {:getTasks {:http-req {:method :get
+                                                           :uri "/rest/operationService/getTasks/"
+                                                           :path-params [:funcid]
+                                                           :query-params [:user_id]}}
+                                     :submitOperation {:http-req {:method :post
+                                                                  :uri "/rest/operationService/submitOperation"}
+                                                       :CreateDB {:funcid "CreateDB"
+                                                                  :label "步骤1：创建数据库"
+                                                                  :shellNames [{:shellID  "caller1"
+                                                                                :shellParams  [{:value "inputParams.HOSTNAME"}
+                                                                                               {:value "root"}
+                                                                                               {:value "inputParams.INITDB2PATH"}
+                                                                                               {:name "-DBDATASIZEGB"
+                                                                                                :value "inputParams.DBDATA"}
+                                                                                               {:name "-USERINFO"
+                                                                                                :value "inputParams.USERINFO"}
+                                                                                               {:name "-DB"
+                                                                                                :value "inputParams.DBNAME"}
+                                                                                               {:name "-DB2PATH"
+                                                                                                :value "inputParams.DB2PATH"}
+                                                                                               {:name "-DISKLIST"
+                                                                                                :value "inputParams.DISKLIST"}
+                                                                                               {:name "-itil"
+                                                                                                :value "inputParams.itil"}
+                                                                                               {:name "-CODEPAGE"
+                                                                                                :value "inputParams.CODEPAGE"}
+                                                                                               {:name "-NODENUM"
+                                                                                                :value "inputParams.NODENUM"}
+                                                                                               {:name "-DB2VER"
+                                                                                                :value "inputParams.DB2VER"}
+                                                                                               {:name "-CHECK"
+                                                                                                :value "inputParams.CHECK"}]}]}
+                                                       :CreateTSK {:funcid "CreateTSK"
+                                                                   :label "步骤2：制定升级任务"}
+                                                       :CheckDB {:funcid "CheckDB"
+                                                                 :label "步骤3：数据库适应性检查"
+                                                                 :shellNames [{:shellParams [{:value "inputParams.SRCHOSTNAME"}
+                                                                                             {:value "inputParams.SRCINSTANCENAME"}
+                                                                                             {:value  "db_precheck.sh"}
+                                                                                             {:name  "-DBNAME"
+                                                                                              :value "inputParams.SRCDBNAME"}
+                                                                                             {:name  "-SCHEMALIST"
+                                                                                              :value "inputParams.SCHEMANAME"}
+                                                                                             {:name  "-EXCLUDETABLE"
+                                                                                              :value "inputParams.EXTABLE"}]
+                                                                               :shellID  "caller1"}
+                                                                              {:shellParams [{:value "inputParams.TGHOSTNAME"}
+                                                                                             {:value "inputParams.TGINSTANCENAME"}
+                                                                                             {:value  "db_precheck.sh"}
+                                                                                             {:name  "-DBNAME"
+                                                                                              :value "inputParams.TGDBNAME"}
+                                                                                             {:name  "-SCHEMALIST"
+                                                                                              :value "inputParams.SCHEMANAME"}
+                                                                                             {:name  "-EXCLUDETABLE"
+                                                                                              :value "inputParams.EXTABLE"}]
+                                                                               :shellID  "caller2"}]}
+                                                       :CreateTB {:funcid "CreateTB"
+                                                                  :label "步骤4：创建表"
+                                                                  :shellNames [{:shellID "caller1"
+                                                                                :shellParams [{:value "inputParams.SRCHOSTNAME"}
+                                                                                              {:value "inputParams.SRCINSTANCENAME"}
+                                                                                              {:value "db_dbddl.sh"}
+                                                                                              {:value "-GETDDL"}
+                                                                                              {:name "-DBNAME"
+                                                                                               :value "inputParams.SRCDBNAME"}
+                                                                                              {:name "-FILEPATH"
+                                                                                               :value "/tmp/cdcauto"}]}
+                                                                               {:shellID "caller2"
+                                                                                :shellParams [{:name "-FILENAME"
+                                                                                               :value "inputParams.SRCDBNAME"}
+                                                                                              {:name "-FROMHOSTNAME"
+                                                                                               :value "inputParams.SRCHOSTNAME"}
+                                                                                              {:name "-FROMPATH"
+                                                                                               :value "/tmp/cdcauto"}
+                                                                                              {:name "-TOHOSTNAME"
+                                                                                               :value "inputParams.TGHOSTNAME"}
+                                                                                              {:name "-TOPATH"
+                                                                                               :value "/tmp/cdcauto"}]}
+                                                                               {:shellID "caller3"
+                                                                                :shellParams [{:value "inputParams.TGHOSTNAME"}
+                                                                                              {:value "inputParams.TGINSTANCENAME"}
+                                                                                              {:value "db_dbddl.sh"}
+                                                                                              {:value "-MODIFYRUNDDL"}
+                                                                                              {:name "-DBNAME"
+                                                                                               :value "inputParams.TGDBNAME"}
+                                                                                              {:name "-FILEPATH"
+                                                                                               :value "/tmp/cdcauto"}
+                                                                                              {:name "-FILENAME"
+                                                                                               :value "inputParams.SRCDBNAME"}]}]}
+                                                       :InitCDC {:funcid "InitCDC"
+                                                                 :label "步骤5：CDC环境初始化"
+                                                                 :shellNames [{:shellParams [{:value "dba_test"}
+                                                                                             {:value "cdcuser"}
+                                                                                             {:value "ts_catadb.sh"}
+                                                                                             {:value "-catalog"}
+                                                                                             {:name  "-dbalias"
+                                                                                              :value "srcdb"}
+                                                                                             {:name  "-dbhost"
+                                                                                              :value "inputParams.SRCHOSTIP"}
+                                                                                             {:name  "-dbport"
+                                                                                              :value "inputParams.SRCPORT"}
+                                                                                             {:name  "-dbname"
+                                                                                              :value "inputParams.SRCDBNAME"}]
+                                                                               :shellID "caller1"}
+                                                                              {:shellParams [{:value "dba_test"}
+                                                                                             {:value "cdcuser"}
+                                                                                             {:value "ts_catadb.sh"}
+                                                                                             {:value "-catalog"}
+                                                                                             {:name  "-dbalias"
+                                                                                              :value "tgtdb"}
+                                                                                             {:name  "-dbhost"
+                                                                                              :value "inputParams.TGHOSTIP"}
+                                                                                             {:name  "-dbport"
+                                                                                              :value "inputParams.TGPORT"}
+                                                                                             {:name  "-dbname"
+                                                                                              :value "inputParams.TGDBNAME"}]
+                                                                               :shellID "caller2"}
+                                                                              {:shellParams [{:value "dba_test"}
+                                                                                             {:value "cdcuser"}
+                                                                                             {:value "ts_buildcdcenv.sh"}
+                                                                                             {:value "-instance"}
+                                                                                             {:name  "-dbalias"
+                                                                                              :value  "srcdb"}
+                                                                                             {:name  "-dbuser"
+                                                                                              :value "cdcuserName"}
+                                                                                             {:name  "-dbpasswd"
+                                                                                              :value "cdcpassword"}]
+                                                                               :shellID "caller3"}
+                                                                              {:shellParams [{:value "dba_test"}
+                                                                                             {:value "cdcuser"}
+                                                                                             {:value "ts_buildcdcenv.sh"}
+                                                                                             {:value "-instance"}
+                                                                                             {:name  "-dbalias"
+                                                                                              :value  "tgtdb"}
+                                                                                             {:name  "-dbuser"
+                                                                                              :value "cdcuserName"}
+                                                                                             {:name  "-dbpasswd"
+                                                                                              :value "cdcpassword"}]
+                                                                               :shellID "caller4"}
+                                                                              {:shellParams [{:value "dba_test"}
+                                                                                             {:value "cdcuser"}
+                                                                                             {:value "ts_buildcdcenv.sh"}
+                                                                                             {:value "-datastore"}
+                                                                                             {:name  "-dbalias"
+                                                                                              :value  "srcdb"}
+                                                                                             {:name  "-dbuser"
+                                                                                              :value "cdcuserName"}
+                                                                                             {:name  "-dbpasswd"
+                                                                                              :value "cdcpassword"}]
+                                                                               :shellID "caller5"}
+                                                                              {:shellParams [{:value "dba_test"}
+                                                                                             {:value "cdcuser"}
+                                                                                             {:value "ts_buildcdcenv.sh"}
+                                                                                             {:value "-datastore"}
+                                                                                             {:name  "-dbalias"
+                                                                                              :value  "tgtdb"}
+                                                                                             {:name  "-dbuser"
+                                                                                              :value "cdcuserName"}
+                                                                                             {:name  "-dbpasswd"
+                                                                                              :value "cdcpassword"}]
+                                                                               :shellID "caller6"}
+                                                                              {:shellParams [{:value "dba_test"}
+                                                                                             {:value "cdcuser"}
+                                                                                             {:value "ts_buildcdcenv.sh"}
+                                                                                             {:value "-subscription"}
+                                                                                             {:name  "-dbalias"
+                                                                                              :value  "srcdb"}]
+                                                                               :shellID "caller7"}
+                                                                              {:shellParams [{:value "dba_test"}
+                                                                                             {:value "cdcuser"}
+                                                                                             {:value "ts_buildcdcenv.sh"}
+                                                                                             {:value "-tablemapping"}
+                                                                                             {:name  "-dbalias"
+                                                                                              :value  "srcdb"}
+                                                                                             {:name  "-dbuser"
+                                                                                              :value "cdcuserName"}
+                                                                                             {:name  "-dbpasswd"
+                                                                                              :value "cdcpassword"}
+                                                                                             {:name  "-dbschema"
+                                                                                              :value "inputParams.SCHEMANAME"}
+                                                                                             {:name  "-EXCLUDETABLE"
+                                                                                              :value "inputParams.EXTABLE"}]
+                                                                               :shellID "caller8"}
+                                                                              {:shellParams [{:value "dba_test"}
+                                                                                             {:value "cdcuser"}
+                                                                                             {:value "ts_buildcdcenv.sh"}
+                                                                                             {:value "-subscription"}
+                                                                                             {:name  "-dbalias"
+                                                                                              :value  "tgtdb"}]
+                                                                               :shellID "caller9"}
+                                                                              {:shellParams [{:value "dba_test"}
+                                                                                             {:value "cdcuser"}
+                                                                                             {:value "ts_buildcdcenv.sh"}
+                                                                                             {:value "-tablemapping"}
+                                                                                             {:name  "-dbalias"
+                                                                                              :value  "tgtdb"}
+                                                                                             {:name  "-dbuser"
+                                                                                              :value "cdcuserName"}
+                                                                                             {:name  "-dbpasswd"
+                                                                                              :value "cdcpassword"}
+                                                                                             {:name  "-dbschema"
+                                                                                              :value "inputParams.SCHEMANAME"}
+                                                                                             {:name  "-EXCLUDETABLE"
+                                                                                              :value "inputParams.EXTABLE"}]
+                                                                               :shellID "caller10"}
+                                                                              {:shellID "caller11"
+                                                                               :indicator "DB2LEVEL="
+                                                                               :shellParams [{:value "inputParams.TGHOSTNAME"}
+                                                                                             {:value "inputParams.TGINSTANCENAME"}
+                                                                                             {:value "db_util.sh"}
+                                                                                             {:value "-GETVERSION"}]}]}
+                                                       :FreshNBU {:funcid "FreshNBU"
+                                                                  :label "步骤6A：开始外部刷新（NBU恢复）"
+                                                                  :shellNames [{:shellID "caller1"
+                                                                                :shellParams [{:value "dba_test"}
+                                                                                              {:value "cdcuser"}
+                                                                                              {:value "ts_alterstatus.sh"}
+                                                                                              {:value "-active"}
+                                                                                              {:name "-DBALIAS"
+                                                                                               :value "fromAlias_recordsrcdb"}]}
+                                                                               {:shellID "caller2"
+                                                                                :shellParams [{:value "dba_test"}
+                                                                                              {:value "cdcuser"}
+                                                                                              {:value "ts_markexternal.sh"}
+                                                                                              {:value "-start"}
+                                                                                              {:name "-DBALIAS"
+                                                                                               :value "fromAlias_recordsrcdb"}]}
+                                                                               {:shellID "caller3"
+                                                                                :waitTime "120000"
+                                                                                :indicator "DBTimeStamp="
+                                                                                :shellParams [{:value "fromAlias_recordSRCHOSTNAME"}
+                                                                                              {:value "fromAlias_recordSRCINSTANCENAME"}
+                                                                                              {:value "db_util.sh"}
+                                                                                              {:value "-GETTIME"}
+                                                                                              {:name "-DBNAME"
+                                                                                               :value "fromAlias_recordSRCDBNAME"}]}
+                                                                               {:shellID "caller4"
+                                                                                :shellParams [{:value "dba_test"}
+                                                                                              {:value "cdcuser"}
+                                                                                              {:value "ts_markexternal.sh"}
+                                                                                              {:value "-end"}
+                                                                                              {:name "-DBALIAS"
+                                                                                               :value "fromAlias_recordsrcdb"}]}
+                                                                               {:shellID "caller5"
+                                                                                :shellParams [{:value "fromAlias_recordSRCHOSTNAME"}
+                                                                                              {:value "fromAlias_recordSRCINSTANCENAME"}
+                                                                                              {:value "db_util.sh"}
+                                                                                              {:value "-ARCHIVELOG"}
+                                                                                              {:name "-DBNAME"
+                                                                                               :value "fromAlias_recordSRCDBNAME"}]}
+                                                                               {:shellID "caller6"
+                                                                                :shellParams [{:value "dba_test"}
+                                                                                              {:value "cdcuser"}
+                                                                                              {:value "ts_maintaincdc.sh"}
+                                                                                              {:value "-backup"}
+                                                                                              {:name "-DBALIAS"
+                                                                                               :value "fromAlias_recordtgtdb"}
+                                                                                              {:name "-dbuser"
+                                                                                               :value "cdcuserName"}
+                                                                                              {:name "-dbpasswd"
+                                                                                               :value "cdcpassword"}]}
+                                                                               {:shellID "caller7"
+                                                                                :shellParams [{:value "fromAlias_recordTGHOSTNAME"}
+                                                                                              {:value "fromAlias_recordTGINSTANCENAME"}
+                                                                                              {:value "db_maintaindb.sh"}
+                                                                                              {:value "-DROPDB"}
+                                                                                              {:name "-DBNAME"
+                                                                                               :value "fromAlias_recordTGDBNAME"}]}
+                                                                               {:shellID "caller8"
+                                                                                :shellParams [{:value "fromAlias_recordTGHOSTNAME"}
+                                                                                              {:value "root"}
+                                                                                              {:value "db_util.sh"}
+                                                                                              {:value "-DROPINST"}
+                                                                                              {:name "-INSTNAME"
+                                                                                               :value "fromAlias_recordTGINSTANCENAME"}]}
+                                                                               {:shellID "caller9"
+                                                                                :indicator "DB2LEVEL="
+                                                                                :shellParams [{:value "fromAlias_recordSRCHOSTNAME"}
+                                                                                              {:value "fromAlias_recordSRCINSTANCENAME"}
+                                                                                              {:value "db_util.sh"}
+                                                                                              {:value "-GETVERSION"}]}
+                                                                               {:shellID "caller10"
+                                                                                :shellParams [{:value "fromAlias_recordTGHOSTNAME"}
+                                                                                              {:value "root"}
+                                                                                              {:value "db_util.sh"}
+                                                                                              {:value "-CREATEINST"}
+                                                                                              {:name "-SVCENAME"
+                                                                                               :value "fromAlias_recordTGPORT"}
+                                                                                              {:name "-VERSION"
+                                                                                               :value "fromAlias_recordSRCVERSION"}
+                                                                                              {:name "-INSTNAME"
+                                                                                               :value "fromAlias_recordTGINSTANCENAME"}]}
+                                                                               {:shellID "caller11"
+                                                                                :shellParams [{:value "fromAlias_recordTGHOSTNAME"}
+                                                                                              {:value "root"}
+                                                                                              {:value "db_restorenbu.sh"}
+                                                                                              {:value "-RESTORE"}
+                                                                                              {:name "-SOURCEHOST"
+                                                                                               :value "fromAlias_recordSRCHOSTNAME"}
+                                                                                              {:name "-DB2INSTUSER"
+                                                                                               :value "fromAlias_recordTGINSTANCENAME"}
+                                                                                              {:name "-DBNAME"
+                                                                                               :value "fromAlias_recordSRCDBNAME"}
+                                                                                              {:name "-NEWDBNAME"
+                                                                                               :value "fromAlias_recordTGDBNAME"}]}]}
+                                                       :FreshLocal {:funcid "FreshLocal"
+                                                                    :label "步骤6B：开始外部刷新（本地恢复）"
+                                                                    :shellNames [{:indicator "The timestamp for this backup image is :"
+                                                                                  :shellID  "caller1"
+                                                                                  :shellParams [{:value  "fromAlias_recordSRCHOSTNAME"}
+                                                                                                {:value  "fromAlias_recordSRCINSTANCENAME"}
+                                                                                                {:value  "db_maintaindb.sh"}
+                                                                                                {:value  "-BACKUPONLINE"}
+                                                                                                {:name  "-DBNAME"
+                                                                                                 :value "fromAlias_recordSRCDBNAME"}
+                                                                                                {:name  "-FILEPATH"
+                                                                                                 :value "fromAlias_recordSRCFILEPATH"}]}
+                                                                                 {:shellID  "caller2"
+                                                                                  :shellParams [{:value  "dba_test"}
+                                                                                                {:value "cdcuser"}
+                                                                                                {:value  "ts_alterstatus.sh"}
+                                                                                                {:value  "-active"}
+                                                                                                {:name  "-DBALIAS"
+                                                                                                 :value "fromAlias_recordsrcdb"}]}
+                                                                                 {:shellID  "caller3"
+                                                                                  :shellParams [{:value  "dba_test"}
+                                                                                                {:value "cdcuser"}
+                                                                                                {:value  "ts_markexternal.sh"}
+                                                                                                {:value  "-start"}
+                                                                                                {:name  "-DBALIAS"
+                                                                                                 :value "fromAlias_recordsrcdb"}]}
+                                                                                 {:shellID  "caller4"
+                                                                                  :waitTime "120000"
+                                                                                  :indicator "DBTimeStamp="
+                                                                                  :shellParams [{:value  "fromAlias_recordSRCHOSTNAME"}
+                                                                                                {:value  "fromAlias_recordSRCINSTANCENAME"}
+                                                                                                {:value  "db_util.sh"}
+                                                                                                {:value  "-GETTIME"}
+                                                                                                {:name  "-DBNAME"
+                                                                                                 :value "fromAlias_recordSRCDBNAME"}]}
+                                                                                 {:shellID  "caller5"
+                                                                                  :shellParams [{:value  "dba_test"}
+                                                                                                {:value "cdcuser"}
+                                                                                                {:value  "ts_markexternal.sh"}
+                                                                                                {:value  "-end"}
+                                                                                                {:name  "-DBALIAS"
+                                                                                                 :value "fromAlias_recordsrcdb"}]}
+                                                                                 {:shellID  "caller6"
+                                                                                  :shellParams [{:value  "fromAlias_recordSRCHOSTNAME"}
+                                                                                                {:value  "fromAlias_recordSRCINSTANCENAME"}
+                                                                                                {:value  "db_util.sh"}
+                                                                                                {:value  "-ARCHIVELOG"}
+                                                                                                {:name  "-DBNAME"
+                                                                                                 :value "fromAlias_recordSRCDBNAME"}]}
+                                                                                 {:shellID  "caller7"
+                                                                                  :shellParams [{:value  "dba_test"}
+                                                                                                {:value "cdcuser"}
+                                                                                                {:value  "ts_maintaincdc.sh"}
+                                                                                                {:value  "-backup"}
+                                                                                                {:name  "-DBALIAS"
+                                                                                                 :value "fromAlias_recordtgtdb"}
+                                                                                                {:name  "-dbuser"
+                                                                                                 :value "cdcuserName"}
+                                                                                                {:name  "-dbpasswd"
+                                                                                                 :value "cdcpassword"}]}
+                                                                                 {:shellID  "caller8"
+                                                                                  :shellParams [{:value  "fromAlias_recordTGHOSTNAME"}
+                                                                                                {:value  "fromAlias_recordTGINSTANCENAME"}
+                                                                                                {:value  "db_maintaindb.sh"}
+                                                                                                {:value  "-DROPDB"}
+                                                                                                {:name  "-DBNAME"
+                                                                                                 :value "fromAlias_recordTGDBNAME"}]}
+                                                                                 {:shellID  "caller9"
+                                                                                  :shellParams [{:value  "fromAlias_recordTGHOSTNAME"}
+                                                                                                {:value  "root"}
+                                                                                                {:value  "db_util.sh"}
+                                                                                                {:value  "-DROPINST"}
+                                                                                                {:name  "-INSTNAME"
+                                                                                                 :value "fromAlias_recordTGINSTANCENAME"}]}
+                                                                                 {:shellID  "caller10"
+                                                                                  :indicator "DB2LEVEL="
+                                                                                  :shellParams [{:value  "fromAlias_recordSRCHOSTNAME"}
+                                                                                                {:value  "fromAlias_recordSRCINSTANCENAME"}
+                                                                                                {:value  "db_util.sh"}
+                                                                                                {:value  "-GETVERSION"}]}
+                                                                                 {:shellID  "caller11"
+                                                                                  :shellParams [{:value  "fromAlias_recordTGHOSTNAME"}
+                                                                                                {:value  "root"}
+                                                                                                {:value  "db_util.sh"}
+                                                                                                {:value  "-CREATEINST"}
+                                                                                                {:name "-SVCENAME"
+                                                                                                 :value  "fromAlias_recordTGPORT"}
+                                                                                                {:name  "-VERSION"
+                                                                                                 :value "fromAlias_recordSRCVERSION"}
+                                                                                                {:name  "-INSTNAME"
+                                                                                                 :value "fromAlias_recordTGINSTANCENAME"}]}
+                                                                                 {:shellPath "/home/ooflow/scripts/middleware/transfile.sh"
+                                                                                  :shellID  "caller12"
+                                                                                  :shellParams [{:name "-FILENAME"
+                                                                                                 :value "construct"}
+                                                                                                {:name "-FROMHOSTNAME"
+                                                                                                 :value "fromAlias_recordSRCHOSTNAME"}
+                                                                                                {:name "-FROMPATH"
+                                                                                                 :value "fromAlias_recordSRCFILEPATH"}
+                                                                                                {:name "-TOHOSTNAME"
+                                                                                                 :value "fromAlias_recordTGHOSTNAME"}
+                                                                                                {:name "-TOPATH"
+                                                                                                 :value "fromAlias_recordTGFILEPATH"}]}
+                                                                                 {:shellID  "caller13"
+                                                                                  :shellParams [{:value  "fromAlias_recordTGHOSTNAME"}
+                                                                                                {:value  "fromAlias_recordTGINSTANCENAME"}
+                                                                                                {:value  "db_maintaindb.sh"}
+                                                                                                {:value  "-RESTORE"}
+                                                                                                {:name  "-DBNAME"
+                                                                                                 :value "fromAlias_recordSRCDBNAME"}
+                                                                                                {:name  "-NEWDBNAME"
+                                                                                                 :value "fromAlias_recordTGDBNAME"}
+                                                                                                {:name  "-FILEPATH"
+                                                                                                 :value "fromAlias_recordTGFILEPATH"}
+                                                                                                {:name  "-TAKENAT"
+                                                                                                 :value "fromAlias_recordBACKUPTIMESTAMP"}]}]}
+                                                       :CompleteFresh {:funcid "CompleteFresh"
+                                                                       :label "步骤7：完成外部刷新"
+                                                                       :shellNames [{:shellID  "caller1"
+                                                                                     :shellParams [{:value  "fromAlias_recordTGHOSTNAME"}
+                                                                                                   {:value  "fromAlias_recordTGINSTANCENAME"}
+                                                                                                   {:value  "db_maintaindb.sh"}
+                                                                                                   {:value  "-rollforward"}
+                                                                                                   {:name  "-dbname"
+                                                                                                    :value "fromAlias_recordTGDBNAME"}
+                                                                                                   {:name  "-isotime"
+                                                                                                    :value "fromAlias_recordCOMPLETE_TIMESTAMP"}
+                                                                                                   {:name  "-overflowlogpath"
+                                                                                                    :value "fromAlias_recordOVERFLOWLOGPATH"}]}
+                                                                                    {:shellID  "caller2"
+                                                                                     :shellParams [{:value  "fromAlias_recordTGHOSTNAME"}
+                                                                                                   {:value  "root"}
+                                                                                                   {:value  "db_upgradedb2.sh"}
+                                                                                                   {:name  "-DBLEVEL"
+                                                                                                    :value "fromAlias_recordDB2LEVEL"}
+                                                                                                   {:name  "-DBINST"
+                                                                                                    :value "fromAlias_recordTGINSTANCENAME"}]}
+                                                                                    {:shellID  "caller3"
+                                                                                     :shellParams [{:value  "dba_test"}
+                                                                                                   {:value "cdcuser"}
+                                                                                                   {:value  "ts_maintaincdc.sh"}
+                                                                                                   {:value  "-restore"}
+                                                                                                   {:name  "-dbalias"
+                                                                                                    :value "fromAlias_recordtgtdb"}
+                                                                                                   {:name  "-dbuser"
+                                                                                                    :value "cdcuserName"}
+                                                                                                   {:name  "-dbpasswd"
+                                                                                                    :value "cdcpassword"}]}]}
+                                                       :DeleteCDC {:funcid "DeleteCDC"
+                                                                   :label "删除CDC实例"
+                                                                   :shellNames [{:shellParam "dba_test cdcuser ts_buildcdcenv.sh -INSTANCE -DELETE -DBALIAS srcdb"
+                                                                                 :shellID  "caller1"}
+                                                                                {:shellParam "dba_test cdcuser  ts_buildcdcenv.sh -INSTANCE -DELETE -DBALIAS tgtdb"
+                                                                                 :shellID  "caller2"}
+                                                                                {:shellParam "dba_test cdcuser  ts_catadb.sh -UNCATALOG -DBALIAS srcdb"
+                                                                                 :shellID  "caller3"}
+                                                                                {:shellParam "dba_test cdcuser  ts_catadb.sh -UNCATALOG -DBALIAS tgtdb"
+                                                                                 :shellID  "caller4"}]}}
+                                     :getEventResult {:http-req {:method :get
+                                                                 :uri "/rest/operationService/getEventResult/"
+                                                                 :path-params [:taskid]}}
+                                     :getAliasRecords {:http-req {:method :get
+                                                                  :uri "/rest/operationService/getAliasRecords/"
+                                                                  :path-params [:taskname]}}
+                                     :getAllTaskNames {:http-req {:method :get
+                                                                  :uri "/rest/operationService/getAllTaskNames/"
+                                                                  :path-params []}}
+                                     :deleteTask {:http-req {:method :get
+                                                             :uri "/rest/operationService/deleteTask/"
+                                                             :path-params [:taskname]}}}}}}

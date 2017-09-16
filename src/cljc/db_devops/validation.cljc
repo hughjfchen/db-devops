@@ -9,6 +9,70 @@
        (into {})
        not-empty))
 
+(defn validate-source-target [source-target]
+  (b/validate
+   source-target
+   [:source :machine]   [[v/required :message "必填"]]
+   [:source :ip] [[v/required :message "必填"] [v/matches #"^([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])$" :message "必须符合IP地址格式"]]
+   [:source :port] [[v/required :message "必填"] [v/positive :message "必须正数"]]
+   [:source :instance] [[v/required :message "必填"]]
+   [:source :db] [[v/required :message "必填"]]
+   [:target :machine] [[v/required :message "必填"]]
+   [:target :ip] [[v/required :message "必填"] [v/matches #"^([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])$" :message "必须符合ip地址格式"]]
+   [:target :port] [[v/required :message "必填"] [v/positive :message "必须正数"]]
+   [:target :instance] [[v/required :message "必填"]]
+   [:target :db] [[v/required :message "必填"]]))
+
+(defn validate-db-info [db-info]
+  (b/validate
+   db-info
+   [:inputParams :HOSTNAME]   [[v/required :message "必填"]]
+   [:inputParams :USERINFO] [[v/required :message "必填"]]
+   [:inputParams :NODENUM] [[v/required :message "必填"] [v/positive :message "必须正数"]]
+   [:inputParams :DBNAME] [[v/required :message "必填"]]
+   [:inputParams :DB2PATH] [[v/required :message "必填"]]
+   [:inputParams :DBDATA] [[v/required :message "必填"] [v/positive :message "必须正数"]]
+   [:inputParams :CODEPAGE] [[v/required :message "必填"] [v/positive :message "必须正数"]]
+   [:inputParams :DISKLIST] [[v/required :message "必填"]]
+   [:inputParams :ItilID] [[v/required :message "必填"]]))
+
+(defn validate-tb-info [tb-info]
+  (b/validate
+   tb-info
+   [:source :machine]   [[v/required :message "必填"]]
+   [:source :ip] [[v/required :message "必填"] [v/matches #"^([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])$" :message "必须符合IP地址格式"]]
+   [:source :port] [[v/required :message "必填"] [v/positive :message "必须正数"]]
+   [:source :instance] [[v/required :message "必填"]]
+   [:source :db] [[v/required :message "必填"]]
+   [:target :machine] [[v/required :message "必填"]]
+   [:target :ip] [[v/required :message "必填"] [v/matches #"^([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])$" :message "必须符合ip地址格式"]]
+   [:target :port] [[v/required :message "必填"] [v/positive :message "必须正数"]]
+   [:target :instance] [[v/required :message "必填"]]
+   [:target :db] [[v/required :message "必填"]]))
+
+(defn validate-task-info [task-info]
+  (b/validate
+   task-info
+   [:POSTTASKNAME]   [[v/required :message "必填"]]))
+
+(defn validate-current-alias-record [alias-records]
+  (b/validate
+   alias-records
+   [:SRCHOSTNAME]   [[v/required :message "必填"]]
+   [:SRCHOSTIP] [[v/required :message "必填"] [v/matches #"^([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])$" :message "必须符合IP地址格式"]]
+   [:SRCPORT] [[v/required :message "必填"] [v/positive :message "必须正数"]]
+   [:SRCINSTANCENAME] [[v/required :message "必填"]]
+   [:SRCDBNAME] [[v/required :message "必填"]]
+   [:TGHOSTNAME] [[v/required :message "必填"]]
+   [:TGHOSTIP] [[v/required :message "必填"] [v/matches #"^([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])$" :message "必须符合ip地址格式"]]
+   [:TGPORT] [[v/required :message "必填"] [v/positive :message "必须正数"]]
+   [:TGINSTANCENAME] [[v/required :message "必填"]]
+   [:TGDBNAME] [[v/required :message "必填"]]
+   [:SCHEMANAME] [[v/required :message "必填"]]
+   [:SRCFILEPATH] [[v/required :message "必填"]]
+   [:TGFILEPATH] [[v/required :message "必填"]]
+   [:OVERFLOWLOGPATH] [[v/required :message "必填"]]))
+
 (defn validate-issue [issue]
   (format-validation-errors
     (b/validate

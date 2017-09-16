@@ -7,7 +7,8 @@
             [db-devops.datetime :as dt]
             [db-devops.pages.common :refer [validation-modal confirm-modal main-content-layout panel-header]]
             [db-devops.routes :refer [href navigate!]]
-            [db-devops.validation :as v]))
+            [db-devops.validation :as v]
+            [cuerdas.core :as clstr]))
 
 (defn table-within-form [data-ratom]
   (when-let [inputs (get-in @data-ratom [:execute :input])]
@@ -23,11 +24,11 @@
            [sa/ModalContent
             [sa/FormField
              [sa/Label "输入参数名"]
-             [sa/Input {:value (:name @new-command-line)
+             [:input {:value (:name @new-command-line)
                         :on-change #(swap! new-command-line assoc :name (-> % .-target .-value keyword))}]]
             [sa/FormField
              [sa/Label "调用脚本的命令行参数"]
-             [sa/Input {:value (:command-line @new-command-line)
+             [:input {:value (:command-line @new-command-line)
                         :on-change #(swap! new-command-line assoc :command-line (-> % .-target .-value))}]]]
            [sa/ModalActions
             [sa/Button {:on-click #(swap! data-ratom assoc-in [:execute :input] (conj (get-in @data-ratom [:execute :input]) @new-command-line))} "增加"]]]]]]
@@ -44,6 +45,11 @@
                                  [sa/TableCell
                                   [sa/Button {:on-click #(swap! data-ratom assoc-in [:execute :input] (remove (fn [x] (= (:name input) (:name x))) (get-in @data-ratom [:execute :input])))} "删除"]]])]])))
 
+(defn- convert-fn-extra-paras [xs]
+  (into [] (map (fn [y] (if (clstr/numeric? y)
+                          (clstr/parse-number y)
+                          y)) (clojure.string/split xs #","))))
+
 (defn checklist-edit-form [checklist]
   (r/with-let [step (name (:step checklist))
                edit-checklist (r/atom (-> checklist
@@ -51,8 +57,7 @@
                                           (dissoc :action)))
                verify-type-list (r/atom [:gt :lt :eq :ge :le :tf :compare-eq :compare-ge :compare-gt :compare-le :compare-lt :multi-part-ge :multi-part-gt :multi-part-le :multi-part-lt :compare-multi-part-ge :compare-multi-part-gt :compare-multi-part-le :compare-multi-part-lt :custom])]
     [sa/Segment
-     {:basic true
-      :fluid true}
+     {:basic true}
      [sa/Form
       [sa/Segment
        [sa/Grid
@@ -62,12 +67,12 @@
          [sa/GridColumn {:width 5}
           [sa/FormField
            [sa/Label "标题"]
-           [sa/Input {:value (:title @edit-checklist)
+           [:input {:value (:title @edit-checklist)
                       :on-change #(swap! edit-checklist assoc :title (-> % .-target .-value))}]]]
          [sa/GridColumn {:width 6}
           [sa/FormField
            [sa/Label "描述"]
-           [sa/Input {:value (:description @edit-checklist)
+           [:input {:value (:description @edit-checklist)
                       :on-change #(swap! edit-checklist assoc :description (-> % .-target .-value))}]]]
          [sa/GridColumn {:width 5}
           [sa/FormField
@@ -82,28 +87,28 @@
          [sa/GridColumn {:width 4}
           [sa/FormField
            [sa/Label "一级类别ID"]
-           [sa/Input {:value (:first-cat @edit-checklist)
+           [:input {:value (:first-cat @edit-checklist)
                       :on-change #(swap! edit-checklist assoc :first-cat (-> % .-target .-value keyword))}]]]
          [sa/GridColumn {:width 4}
           [sa/FormField
            [sa/Label "一级类别title"]
-           [sa/Input {:value (:first-cat-label @edit-checklist)
+           [:input {:value (:first-cat-label @edit-checklist)
                       :on-change #(swap! edit-checklist assoc :first-cat-label (-> % .-target .-value))}]]]
          [sa/GridColumn {:width 4}
           [sa/FormField
            [sa/Label "二级类别ID"]
-           [sa/Input {:value (:second-cat @edit-checklist)
+           [:input {:value (:second-cat @edit-checklist)
                       :on-change #(swap! edit-checklist assoc :second-cat (-> % .-target .-value keyword))}]]]
          [sa/GridColumn {:width 4}
           [sa/FormField
            [sa/Label "二级类别title"]
-           [sa/Input {:value (:second-cat-label @edit-checklist)
+           [:input {:value (:second-cat-label @edit-checklist)
                       :on-change #(swap! edit-checklist assoc :second-cat-label (-> % .-target .-value))}]]]]
         [sa/GridRow
          [sa/GridColumn
           [sa/FormField
            [sa/Label "执行脚本名"]
-           [sa/Input {:value (get-in  @edit-checklist [:execute :script-name])
+           [:input {:value (get-in  @edit-checklist [:execute :script-name])
                       :on-change #(swap! edit-checklist assoc-in [:execute :script-name] (-> % .-target .-value))}]]]]
         [sa/GridRow
          [sa/GridColumn {:width 16}
@@ -112,7 +117,7 @@
          [sa/GridColumn
           [sa/FormField
            [sa/Label "脚本返回结果ID"]
-           [sa/Input {:value (get-in  @edit-checklist [:execute :output :field-path])
+           [:input {:value (get-in  @edit-checklist [:execute :output :field-path])
                       :on-change #(swap! edit-checklist assoc-in [:execute :output :field-path] (map keyword (-> % .-target .-value (clojure.string/split #" "))))}]]]]
         [sa/GridRow
          [sa/GridColumn {:width 4}
@@ -125,23 +130,23 @@
          [sa/GridColumn {:width 4}
           [sa/FormField
            [sa/Label "校验函数额外参数"]
-           [sa/Input {:value (get-in  @edit-checklist [:verify :rule-fn-extra-paras])
-                      :on-change #(swap! edit-checklist assoc-in [:verify :rule-fn-extra-paras] (-> % .-target .-value (clojure.string/split #",")))}]]]
+           [:input {:value (get-in  @edit-checklist [:verify :rule-fn-extra-paras])
+                    :on-change #(swap! edit-checklist assoc-in [:verify :rule-fn-extra-paras] (-> % .-target .-value))}]]]
          [sa/GridColumn {:width 4}
           [sa/FormField
            [sa/Label "校验定制函数"]
-           [sa/Input {:value (get-in  @edit-checklist [:verify :rule-fn])
+           [:input {:value (get-in  @edit-checklist [:verify :rule-fn])
                       :on-change #(swap! edit-checklist assoc-in [:verify :rule-fn] (-> % .-target .-value))}]]]
          [sa/GridColumn {:width 4}
           [sa/FormField
            [sa/Label "校验规则描述"]
-           [sa/Input {:value (get-in  @edit-checklist [:verify :rule-description])
+           [:input {:value (get-in  @edit-checklist [:verify :rule-description])
                       :on-change #(swap! edit-checklist assoc-in [:verify :rule-description] (-> % .-target .-value))}]]]]
         [sa/GridRow
          [sa/GridColumn
           [sa/FormField
            [sa/Label "合规建议"]
-           [sa/Input {:value (:comply-suggestion @edit-checklist)
+           [:input {:value (:comply-suggestion @edit-checklist)
                       :on-change #(swap! edit-checklist assoc :comply-suggestion (-> % .-target .-value))}]]]]]]]
      [sa/Divider]
      [sa/ButtonGroup
@@ -151,9 +156,10 @@
      [sa/ButtonGroup
       {:floated "right"}
       [sa/Button
-       {:on-click #(if (:id checklist)
-                     (run-events [[:save-checklist step  @edit-checklist] [:set-active-page :checklist-management]])
-                     (run-events [[:create-checklist step  @edit-checklist] [:set-active-page :checklist-management]]))} "保存"]]]))
+       {:on-click #(do (swap! edit-checklist assoc-in [:verify :rule-fn-extra-paras] (convert-fn-extra-paras (get-in @edit-checklist [:verify :rule-fn-extra-paras])))
+                       (if (:id checklist)
+                         (run-events [[:save-checklist step  @edit-checklist] [:set-active-page :checklist-management]])
+                         (run-events [[:create-checklist step  @edit-checklist] [:set-active-page :checklist-management]])))} "保存"]]]))
 
 (defn checklist-edit-panel []
   (r/with-let [checklist (subscribe [:edit-checklist])]
