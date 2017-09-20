@@ -39,6 +39,7 @@
                   (s/optional-key :SRCVERSION) (s/maybe s/Str)})
 
 (def TaskInfo {:TASKNAME s/Str
+               (s/optional-key :POSTTASKNAME) s/Str
                :CURSTEP s/Str
                :PROCSTATUS s/Num
                :BACKUPSTATUS (s/maybe s/Str)
@@ -56,13 +57,14 @@
                      (s/optional-key :CHECK) s/Str
                      (s/optional-key :DB2VER) s/Str
                      (s/optional-key :NODENUM) s/Num
-                     (s/optional-key :SYS) s/Bool
-                     (s/optional-key :FS) s/Bool
-                     (s/optional-key :USER) s/Bool
-                     (s/optional-key :INST) s/Bool
-                     (s/optional-key :DBM) s/Bool
-                     (s/optional-key :DB) s/Bool
-                     (s/optional-key :DB2PATH) s/Str}
+                     :SYS s/Bool
+                     :FS s/Bool
+                     :USER s/Bool
+                     :INST s/Bool
+                     :DBM s/Bool
+                     :DB s/Bool
+                     (s/optional-key :DB2PATH) s/Str
+                     (s/optional-key :INITDB2PATH) s/Str}
        :funcid funcid}
       (merge user)))
 

@@ -89,17 +89,17 @@
      [task-output-ui [] [:task-output]]]))
 
 (defn make-db-input-column [column]
-  (fn [row-cursor v-errors]
-    [ui-input-field "" row-cursor column v/validate-current-alias-record v-errors #(swap! row-cursor assoc-in column (-> % .-target .-value))]))
+  (fn [row-cursor index v-errors]
+    [ui-input-field "" row-cursor column v/validate-current-alias-record v-errors #(dispatch [:edit-alias-record-inline-input (cons index column) (-> % .-target .-value)])]))
 
 (defn make-db-checkbox-column [checkboxes]
-  (fn [row-cursor v-errors]
+  (fn [row-cursor index v-errors]
     (into [:div]
           (map (fn [cb]
                  [sa/Checkbox
                   {:label (:label cb)
                    :checked (boolean (get-in @row-cursor (:path cb)))
-                   :on-change (fn [e] (swap! row-cursor update-in (:path cb) not))}]) checkboxes))))
+                   :on-change (fn [e] (dispatch [:edit-alias-record-inline-checkbox (cons index (:path cb))]))}]) checkboxes))))
 
 (defn check-db-form []
   [submit-operation-form :CheckDB "步骤 #2：数据库适应性检查" [["模式名" (make-db-input-column [:SCHEMANAME])] ["排除表" (make-db-input-column [:EXTABLE])]]])
@@ -132,17 +132,17 @@
     :pointing true
     :size "tiny"}
    [sa/MenuItem {:active (= active-step :CreateTSK)
-                 :on-click #(run-events [[:clear-all-output-poller] [:reset-task-output] [:set-active-phase-one-step :CreateTSK]])} "步骤 #1：制定升级任务"]
+                 :on-click #(run-events [[:clear-all-output-poller] [:reset-task-output] [:reset-task-alias-records] [:set-active-phase-one-step :CreateTSK]])} "步骤 #1：制定升级任务"]
    [sa/MenuItem {:active (= active-step :CheckDB)
-                 :on-click #(run-events [[:clear-all-output-poller] [:reset-task-output] [:set-active-phase-one-step :CheckDB] [:get-task-info :CheckDB]])} "步骤 #2：数据库适应性检查"]
+                 :on-click #(run-events [[:clear-all-output-poller] [:reset-task-output] [:reset-task-alias-records] [:set-active-phase-one-step :CheckDB] [:get-task-info :CheckDB]])} "步骤 #2：数据库适应性检查"]
    [sa/MenuItem {:active (= active-step :InitCDC)
-                 :on-click #(run-events [[:clear-all-output-poller] [:reset-task-output] [:set-active-phase-one-step :InitCDC] [:get-task-info :InitCDC]])} "步骤 #3：CDC环境初始化"]
+                 :on-click #(run-events [[:clear-all-output-poller] [:reset-task-output] [:reset-task-alias-records] [:set-active-phase-one-step :InitCDC] [:get-task-info :InitCDC]])} "步骤 #3：CDC环境初始化"]
    [sa/MenuItem {:active (= active-step :FreshNBU)
-                 :on-click #(run-events [[:clear-all-output-poller] [:reset-task-output] [:set-active-phase-one-step :FreshNBU] [:get-task-info :FreshNBU]])} "步骤 #4A：开始外部刷新（NBU恢复）"]
+                 :on-click #(run-events [[:clear-all-output-poller] [:reset-task-output] [:reset-task-alias-records] [:set-active-phase-one-step :FreshNBU] [:get-task-info :FreshNBU]])} "步骤 #4A：开始外部刷新（NBU恢复）"]
    [sa/MenuItem {:active (= active-step :FreshLocal)
-                 :on-click #(run-events [[:clear-all-output-poller] [:reset-task-output] [:set-active-phase-one-step :FreshLocal] [:get-task-info :FreshLocal]])} "步骤 #4B：开始外部刷新（本地恢复）"]
+                 :on-click #(run-events [[:clear-all-output-poller] [:reset-task-output] [:reset-task-alias-records] [:set-active-phase-one-step :FreshLocal] [:get-task-info :FreshLocal]])} "步骤 #4B：开始外部刷新（本地恢复）"]
    [sa/MenuItem {:active (= active-step :CompleteFresh)
-                 :on-click #(run-events [[:clear-all-output-poller] [:reset-task-output] [:set-active-phase-one-step :CompleteFresh] [:get-task-info :CompleteFresh]])} "步骤 #5：完成外部刷新"]])
+                 :on-click #(run-events [[:clear-all-output-poller] [:reset-task-output] [:reset-task-alias-records] [:set-active-phase-one-step :CompleteFresh] [:get-task-info :CompleteFresh]])} "步骤 #5：完成外部刷新"]])
 
 (defn phase-one-panel []
   (r/with-let [active-phase-one-step (subscribe [:active-phase-one-step])]

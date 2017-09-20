@@ -27,6 +27,7 @@
  (fn [db [_ operation params]]
    (POST (str "/api/upgrade-api-submit-operation" "-" (clojure.string/lower-case (name operation)))
          {:params (as-> params $
+                    (assoc-in $ [:inputParam :POSTTASKNAME] (get-in $ [:inputParam :TASKNAME]))
                     (assoc $ :user_id (get-in db [:user :screenname]))
                     (assoc $ :user_name (get-in db [:user :screenname]))
                     (assoc $ :funcid operation)
@@ -103,6 +104,11 @@
    (assoc db :task-alias-records taskdb)))
 
 (reg-event-db
+ :reset-task-alias-records
+ (fn [db _]
+   (dissoc db :task-alias-records)))
+
+(reg-event-db
  :delete-task
  (fn [db [_ taskname]]
    (GET (str "/api/upgrade-api-delete-task/" taskname)
@@ -114,3 +120,13 @@
  :set-delete-task-result
  (fn [db [_ result]]
    (assoc db :delete-task-result result)))
+
+(reg-event-db
+ :edit-alias-record-inline-input
+ (fn [db [_ path value]]
+   (assoc-in db (cons :task-alias-records path) value )))
+
+(reg-event-db
+ :edit-alias-record-inline-checkbox
+ (fn [db [_ path]]
+   (update-in db (cons :task-alias-records path) not)))

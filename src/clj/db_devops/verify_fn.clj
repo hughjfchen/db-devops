@@ -1,5 +1,6 @@
 (ns db-devops.verify-fn
   (:require [schema.core :as s]
+            [cuerdas.core :as cstr]
             [clojure.tools.logging :as log]
             [mount.core :refer [defstate]]))
 
@@ -14,8 +15,9 @@
 ;; some pre-defined functions
 
 (defn verify-fn-eq[cl s t & rest]
-  (let [target-result (get-in cl [:execute :output :result :target])]
-    (some #(= target-result %) rest)))
+  (let [target-result (get-in cl [:execute :output :result :target])
+        converted-result (if (cstr/numeric? target-result) (cstr/parse-number target-result) target-result)]
+    (some #(= converted-result %) rest)))
 
 (defn verify-fn-gt[cl s t & rest]
   (let [target-result (get-in cl [:execute :output :result :target])]

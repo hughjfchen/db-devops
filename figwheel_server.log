@@ -16666,3 +16666,844 @@ notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/p
 [0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
 [32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.959 seconds.[0m
 notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/auth.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.7 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/goog/deps.js
+notifying browser that file changed:  target/cljsbuild/public/js/out/cljs_deps.js
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/upgrade.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.597 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/upgrade.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.459 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/upgrade.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.282 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/upgrade.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 13.799 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/widgets/input_params_table.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[36m----  Compiler Warning on   src/cljs/db_devops/pages/phase_one_panel.cljs   line:93  column:24  ----[0m
+
+  [1mUse of undeclared Var db-devops.pages.phase-one-panel/row-cursor[0m
+
+  [36m89[0m  [36m     [task-output-ui [] [:task-output]]]))[0m
+  [36m90[0m  [36m[0m
+  [36m91[0m  [36m(defn make-db-input-column [column][0m
+  [36m92[0m  [36m  (fn [data-atom index v-errors][0m
+  [33m93[0m  [1m    [ui-input-field "" row-cursor column v/validate-current-alias-record v-errors #(swap! row-cursor assoc-in column (-> % .-target .-value))]))[0m
+  [0m  [0m  [33m                       ^--- Use of undeclared Var db-devops.pages.phase-one-panel/row-cursor[0m
+  [36m94[0m  [36m[0m
+  [36m95[0m  [36m(defn make-db-checkbox-column [checkboxes][0m
+  [36m96[0m  [36m  (fn [row-cursor v-errors][0m
+  [36m97[0m  [36m    (into [:div][0m
+  [36m98[0m  [36m          (map (fn [cb][0m
+
+[36m----  Compiler Warning : Please see src/cljs/db_devops/pages/phase_one_panel.cljs  ----[0m
+[36m----  Compiler Warning on   src/cljs/db_devops/pages/phase_one_panel.cljs   line:93  column:91  ----[0m
+
+  [1mUse of undeclared Var db-devops.pages.phase-one-panel/row-cursor[0m
+
+  [36m89[0m  [36m     [task-output-ui [] [:task-output]]]))[0m
+  [36m90[0m  [36m[0m
+  [36m91[0m  [36m(defn make-db-input-column [column][0m
+  [36m92[0m  [36m  (fn [data-atom index v-errors][0m
+  [33m93[0m  [1m    [ui-input-field "" row-cursor column v/validate-current-alias-record v-errors #(swap! row-cursor assoc-in column (-> % .-target .-value))]))[0m
+  [0m  [0m  [33m                                                                                          ^--- Use of undeclared Var db-devops.pages.phase-one-panel/row-cursor[0m
+  [36m94[0m  [36m[0m
+  [36m95[0m  [36m(defn make-db-checkbox-column [checkboxes][0m
+  [36m96[0m  [36m  (fn [row-cursor v-errors][0m
+  [36m97[0m  [36m    (into [:div][0m
+  [36m98[0m  [36m          (map (fn [cb][0m
+
+[36m----  Compiler Warning : Please see src/cljs/db_devops/pages/phase_one_panel.cljs  ----[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.281 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/phase_one_panel.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[36m----  Compiler Warning on   src/cljs/db_devops/pages/phase_one_panel.cljs   line:93  column:90  ----[0m
+
+  [1mUse of undeclared Var db-devops.pages.phase-one-panel/row-cursor[0m
+
+  [36m89[0m  [36m     [task-output-ui [] [:task-output]]]))[0m
+  [36m90[0m  [36m[0m
+  [36m91[0m  [36m(defn make-db-input-column [column][0m
+  [36m92[0m  [36m  (fn [data-atom index v-errors][0m
+  [33m93[0m  [1m    [ui-input-field "" data-atom column v/validate-current-alias-record v-errors #(swap! row-cursor assoc-in column (-> % .-target .-value))]))[0m
+  [0m  [0m  [33m                                                                                         ^--- Use of undeclared Var db-devops.pages.phase-one-panel/row-cursor[0m
+  [36m94[0m  [36m[0m
+  [36m95[0m  [36m(defn make-db-checkbox-column [checkboxes][0m
+  [36m96[0m  [36m  (fn [row-cursor v-errors][0m
+  [36m97[0m  [36m    (into [:div][0m
+  [36m98[0m  [36m          (map (fn [cb][0m
+
+[36m----  Compiler Warning : Please see src/cljs/db_devops/pages/phase_one_panel.cljs  ----[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.128 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/phase_one_panel.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.153 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/phase_one_panel.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[36m----  Compiler Warning on   src/cljs/db_devops/pages/phase_one_panel.cljs   line:102  column:46  ----[0m
+
+  [1mUse of undeclared Var db-devops.pages.phase-one-panel/row-cursor[0m
+
+  [36m 98[0m  [36m          (map (fn [cb][0m
+  [36m 99[0m  [36m                 [sa/Checkbox[0m
+  [36m100[0m  [36m                  {:label (:label cb)[0m
+  [36m101[0m  [36m                   :checked (boolean (get-in @data-atom (cons index (:path cb))))[0m
+  [33m102[0m  [1m                   :on-change (fn [e] (swap! row-cursor update-in (:path cb) not))}]) checkboxes))))[0m
+  [0m   [0m  [33m                                             ^--- Use of undeclared Var db-devops.pages.phase-one-panel/row-cursor[0m
+  [36m103[0m  [36m[0m
+  [36m104[0m  [36m(defn check-db-form [][0m
+  [36m105[0m  [36m  [submit-operation-form :CheckDB "步骤 #2：数据库适应性检查" [["模式名" (make-db-input-column [:SCHEMANAME])] ["排除表" (make-db-input-column [:EXTABLE])]]])[0m
+  [36m106[0m  [36m[0m
+  [36m107[0m  [36m(defn init-cdc-form [][0m
+
+[36m----  Compiler Warning : Please see src/cljs/db_devops/pages/phase_one_panel.cljs  ----[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.144 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/phase_one_panel.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.312 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/phase_one_panel.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 12.752 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/phase_one_panel.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 2.402 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/phase_one_panel.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.188 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/widgets/input_params_table.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.131 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/phase_one_panel.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.886 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/handlers/phase_one_api.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 15.107 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/widgets/input_params_table.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.102 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/phase_one_panel.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.904 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/handlers/phase_one_api.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.079 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/phase_one_panel.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.013 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/upgrade.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.981 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/upgrade.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.117 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/upgrade.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[31mFailed to compile "target/cljsbuild/public/js/app.js" in 0.66 seconds.[0m
+[36m----  Could not Analyze  src/cljs/db_devops/pages/upgrade.cljs   line:209  column:10  ----[0m
+
+  [1mcond requires an even number of forms[0m
+
+  [36m207[0m  [36m[sa/TableCell (str (get-in cl [:execute :output :result :source]))][0m
+  [36m208[0m  [36m[sa/TableCell (str (get-in cl [:execute :output :result :target]))][0m
+  [33m209[0m  [1m(cond[0m
+  [0m   [0m  [33m^--- cond requires an even number of forms[0m
+  [36m210[0m  [36m  (= (:first-cat cl) :manual-check) [sa/TableCell[0m
+  [36m211[0m  [36m                                     [sa/Checkbox {:toggle true}]][0m
+  [36m212[0m  [36m  (get-in cl [:verify :result]) [sa/TableCell {:positive true :negative false} "通过"][0m
+
+[36m----  Analysis Error : Please see src/cljs/db_devops/pages/upgrade.cljs  ----[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.083 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/upgrade.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.035 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/upgrade.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[31mFailed to compile "target/cljsbuild/public/js/app.js" in 0.723 seconds.[0m
+[36m----  Could not Read  src/cljs/db_devops/pages/rollback.cljs   line:19  column:15  ----[0m
+
+  [1mMap literal must contain an even number of forms[0m
+
+  [36m17[0m  [36m     [sa/Divider][0m
+  [36m18[0m  [36m     [sa/Tab[0m
+  [33m19[0m  [1m      {:pane }]]))[0m
+  [0m  [0m  [33m              ^--- Map literal must contain an even number of forms[0m
+  [36m20[0m  [36m[0m
+  [36m21[0m  [36m(defn rollback-page [][0m
+  [36m22[0m  [36m  [main-content-layout rollback-panel])[0m
+
+[36m----  Reader Error : Please see src/cljs/db_devops/pages/rollback.cljs  ----[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[31mFailed to compile "target/cljsbuild/public/js/app.js" in 0.7 seconds.[0m
+[36m----  Could not Read  src/cljs/db_devops/pages/rollback.cljs   line:19  column:16  ----[0m
+
+  [1mMap literal must contain an even number of forms[0m
+
+  [36m17[0m  [36m     [sa/Divider][0m
+  [36m18[0m  [36m     [sa/Tab[0m
+  [33m19[0m  [1m      {:panes }]]))[0m
+  [0m  [0m  [33m               ^--- Map literal must contain an even number of forms[0m
+  [36m20[0m  [36m[0m
+  [36m21[0m  [36m(defn rollback-page [][0m
+  [36m22[0m  [36m  [main-content-layout rollback-panel])[0m
+
+[36m----  Reader Error : Please see src/cljs/db_devops/pages/rollback.cljs  ----[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[31mFailed to compile "target/cljsbuild/public/js/app.js" in 0.73 seconds.[0m
+[36m----  Could not Read  src/cljs/db_devops/pages/rollback.cljs   line:24  column:16  ----[0m
+
+  [1mMap literal must contain an even number of forms[0m
+
+  [36m22[0m  [36m     [sa/Divider][0m
+  [36m23[0m  [36m     [sa/Tab[0m
+  [33m24[0m  [1m      {:panes }]]))[0m
+  [0m  [0m  [33m               ^--- Map literal must contain an even number of forms[0m
+  [36m25[0m  [36m[0m
+  [36m26[0m  [36m(defn rollback-page [][0m
+  [36m27[0m  [36m  [main-content-layout rollback-panel])[0m
+
+[36m----  Reader Error : Please see src/cljs/db_devops/pages/rollback.cljs  ----[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[31mFailed to compile "target/cljsbuild/public/js/app.js" in 0.669 seconds.[0m
+[36m----  Could not Read  src/cljs/db_devops/pages/rollback.cljs   line:23  column:27  ----[0m
+
+  [1mMap literal must contain an even number of forms[0m
+
+  [36m21[0m  [36m     [sa/TableCell "1"][0m
+  [36m22[0m  [36m     [sa/TableCell "1"][0m
+  [33m23[0m  [1m     [sa/TableCell "1"]]]})[0m
+  [0m  [0m  [33m                          ^--- Map literal must contain an even number of forms[0m
+  [36m24[0m  [36m[0m
+  [36m25[0m  [36m(defn rollback-panel [][0m
+  [36m26[0m  [36m  (r/with-let [checklist (subscribe [:edit-checklist])][0m
+
+[36m----  Reader Error : Please see src/cljs/db_devops/pages/rollback.cljs  ----[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[31mFailed to compile "target/cljsbuild/public/js/app.js" in 0.597 seconds.[0m
+[36m----  Could not Read  src/cljs/db_devops/pages/rollback.cljs   line:23  column:27  ----[0m
+
+  [1mMap literal must contain an even number of forms[0m
+
+  [36m21[0m  [36m     [sa/TableCell "1"][0m
+  [36m22[0m  [36m     [sa/TableCell "1"][0m
+  [33m23[0m  [1m     [sa/TableCell "1"]]]})[0m
+  [0m  [0m  [33m                          ^--- Map literal must contain an even number of forms[0m
+  [36m24[0m  [36m[0m
+  [36m25[0m  [36m(defn rollback-panel [][0m
+  [36m26[0m  [36m  (r/with-let [checklist (subscribe [:edit-checklist])][0m
+
+[36m----  Reader Error : Please see src/cljs/db_devops/pages/rollback.cljs  ----[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[31mFailed to compile "target/cljsbuild/public/js/app.js" in 0.633 seconds.[0m
+[36m----  Could not Read  src/cljs/db_devops/pages/rollback.cljs   line:23  column:27  ----[0m
+
+  [1mMap literal must contain an even number of forms[0m
+
+  [36m21[0m  [36m     [sa/TableCell "1"][0m
+  [36m22[0m  [36m     [sa/TableCell "1"][0m
+  [33m23[0m  [1m     [sa/TableCell "1"]]]})[0m
+  [0m  [0m  [33m                          ^--- Map literal must contain an even number of forms[0m
+  [36m24[0m  [36m[0m
+  [36m25[0m  [36m(defn rollback-panel [][0m
+  [36m26[0m  [36m  (r/with-let [checklist (subscribe [:edit-checklist])][0m
+
+[36m----  Reader Error : Please see src/cljs/db_devops/pages/rollback.cljs  ----[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.266 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.935 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.92 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.852 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.94 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.871 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.955 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.264 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.96 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.982 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.063 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.007 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.945 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.434 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.062 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.834 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.976 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.976 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.053 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.974 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.925 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.108 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.059 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.92 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.031 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.03 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.09 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.917 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.967 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.837 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.84 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.895 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.913 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.199 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.87 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.951 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.906 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.877 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.019 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.902 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.013 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.035 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.023 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.931 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.936 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.938 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.082 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.04 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.075 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.941 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.056 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.994 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.018 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.977 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.028 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.067 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.104 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.099 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.02 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.879 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.004 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.948 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.906 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.94 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.088 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.872 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.934 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.874 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.862 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.909 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.931 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.997 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.92 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.918 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.039 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.928 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.149 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.857 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.89 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[36m----  Compiler Warning on   src/cljs/db_devops/pages/rollback.cljs   line:209  column:44  ----[0m
+
+  [1mUse of undeclared Var reagent.core/as-string[0m
+
+  [36m205[0m  [36m   [panel-header "回退方案"][0m
+  [36m206[0m  [36m   [sa/Divider][0m
+  [36m207[0m  [36m   [sa/Tab[0m
+  [36m208[0m  [36m    {:renderActiveOnly true[0m
+  [33m209[0m  [1m     :panes [{:menuItem "CDC升级回退方案" :pane (r/as-string [cdc-rollback-table])}[0m
+  [0m   [0m  [33m                                           ^--- Use of undeclared Var reagent.core/as-string[0m
+  [36m210[0m  [36m             {:menuItem "本地大版本升级回退方案" :pane (r/as-component [local-version-rollback-table])}[0m
+  [36m211[0m  [36m             {:menuItem "本地小补丁升级回退方案" :pane (r/as-component [local-fixpack-rollback-table])}]}]])[0m
+  [36m212[0m  [36m[0m
+  [36m213[0m  [36m(defn rollback-page [][0m
+  [36m214[0m  [36m  [main-content-layout rollback-panel])[0m
+
+[36m----  Compiler Warning : Please see src/cljs/db_devops/pages/rollback.cljs  ----[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.949 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.923 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.834 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.944 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[36m----  Compiler Warning on   src/cljs/db_devops/pages/rollback.cljs   line:207  column:5  ----[0m
+
+  [1mUse of undeclared Var soda-ash.core/Sement[0m
+
+  [36m203[0m  [36m[sa/Segment[0m
+  [36m204[0m  [36m {:basic true}[0m
+  [36m205[0m  [36m [panel-header "回退方案"][0m
+  [36m206[0m  [36m [sa/Divider][0m
+  [33m207[0m  [1m [sa/Sement[0m
+  [0m   [0m  [33m  ^--- Use of undeclared Var soda-ash.core/Sement[0m
+  [36m208[0m  [36m  [sa/Tab[0m
+  [36m209[0m  [36m   {:renderActiveOnly true[0m
+  [36m210[0m  [36m    :panes [{:menuItem "CDC升级回退方案" :pane  [cdc-rollback-table]}[0m
+  [36m211[0m  [36m            {:menuItem "本地大版本升级回退方案" :pane (r/as-component [local-version-rollback-table])}[0m
+  [36m212[0m  [36m            {:menuItem "本地小补丁升级回退方案" :pane (r/as-component [local-fixpack-rollback-table])}]}]]])[0m
+
+[36m----  Compiler Warning : Please see src/cljs/db_devops/pages/rollback.cljs  ----[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.956 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.937 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.93 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[36m----  Compiler Warning on   src/cljs/db_devops/pages/rollback.cljs   line:209  column:44  ----[0m
+
+  [1mNo such namespace: s, could not locate s.cljs, s.cljc, or JavaScript source providing "s"[0m
+
+  [36m205[0m  [36m   [panel-header "回退方案"][0m
+  [36m206[0m  [36m   [sa/Divider][0m
+  [36m207[0m  [36m   [sa/Tab[0m
+  [36m208[0m  [36m    {:renderActiveOnly true[0m
+  [33m209[0m  [1m     :panes [{:menuItem "CDC升级回退方案" :pane (s/as-component [cdc-rollback-table])}[0m
+  [0m   [0m  [33m                                           ^--- No such namespace: s, could not locate s.cljs, s.cljc, or JavaScript source providing "s"[0m
+  [36m210[0m  [36m             {:menuItem "本地大版本升级回退方案" :pane (r/as-component [local-version-rollback-table])}[0m
+  [36m211[0m  [36m             {:menuItem "本地小补丁升级回退方案" :pane (r/as-component [local-fixpack-rollback-table])}]}]])[0m
+  [36m212[0m  [36m[0m
+  [36m213[0m  [36m(defn rollback-page [][0m
+  [36m214[0m  [36m  [main-content-layout rollback-panel])[0m
+
+[36m----  Compiler Warning : Please see src/cljs/db_devops/pages/rollback.cljs  ----[0m
+[36m----  Compiler Warning on   src/cljs/db_devops/pages/rollback.cljs   line:209  column:44  ----[0m
+
+  [1mUse of undeclared Var s/as-component[0m
+
+  [36m205[0m  [36m   [panel-header "回退方案"][0m
+  [36m206[0m  [36m   [sa/Divider][0m
+  [36m207[0m  [36m   [sa/Tab[0m
+  [36m208[0m  [36m    {:renderActiveOnly true[0m
+  [33m209[0m  [1m     :panes [{:menuItem "CDC升级回退方案" :pane (s/as-component [cdc-rollback-table])}[0m
+  [0m   [0m  [33m                                           ^--- Use of undeclared Var s/as-component[0m
+  [36m210[0m  [36m             {:menuItem "本地大版本升级回退方案" :pane (r/as-component [local-version-rollback-table])}[0m
+  [36m211[0m  [36m             {:menuItem "本地小补丁升级回退方案" :pane (r/as-component [local-fixpack-rollback-table])}]}]])[0m
+  [36m212[0m  [36m[0m
+  [36m213[0m  [36m(defn rollback-page [][0m
+  [36m214[0m  [36m  [main-content-layout rollback-panel])[0m
+
+[36m----  Compiler Warning : Please see src/cljs/db_devops/pages/rollback.cljs  ----[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.317 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.923 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.933 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.969 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.827 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.964 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.925 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.945 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.945 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.863 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.874 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.953 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[36m----  Compiler Warning on   src/cljs/db_devops/pages/rollback.cljs   line:209  column:6  ----[0m
+
+  [1mUse of undeclared Var soda-ash.core/menuItem[0m
+
+  [36m205[0m  [36m   [panel-header "回退方案"][0m
+  [36m206[0m  [36m   [sa/Divider][0m
+  [36m207[0m  [36m   [sa/Menu[0m
+  [36m208[0m  [36m    {:tabular true}[0m
+  [33m209[0m  [1m    [sa/menuItem "CDC升级回退方案" :pane (r/as-component [cdc-rollback-table])][0m
+  [0m   [0m  [33m     ^--- Use of undeclared Var soda-ash.core/menuItem[0m
+  [36m210[0m  [36m    [sa/menuItem "本地大版本升级回退方案" :pane (r/as-component [local-version-rollback-table])][0m
+  [36m211[0m  [36m    [sa/menuItem "本地小补丁升级回退方案" :pane (r/as-component [local-fixpack-rollback-table])]]])[0m
+  [36m212[0m  [36m[0m
+  [36m213[0m  [36m(defn rollback-page [][0m
+  [36m214[0m  [36m  [main-content-layout rollback-panel])[0m
+
+[36m----  Compiler Warning : Please see src/cljs/db_devops/pages/rollback.cljs  ----[0m
+[36m----  Compiler Warning on   src/cljs/db_devops/pages/rollback.cljs   line:210  column:6  ----[0m
+
+  [1mUse of undeclared Var soda-ash.core/menuItem[0m
+
+  [36m206[0m  [36m   [sa/Divider][0m
+  [36m207[0m  [36m   [sa/Menu[0m
+  [36m208[0m  [36m    {:tabular true}[0m
+  [36m209[0m  [36m    [sa/menuItem "CDC升级回退方案" :pane (r/as-component [cdc-rollback-table])][0m
+  [33m210[0m  [1m    [sa/menuItem "本地大版本升级回退方案" :pane (r/as-component [local-version-rollback-table])][0m
+  [0m   [0m  [33m     ^--- Use of undeclared Var soda-ash.core/menuItem[0m
+  [36m211[0m  [36m    [sa/menuItem "本地小补丁升级回退方案" :pane (r/as-component [local-fixpack-rollback-table])]]])[0m
+  [36m212[0m  [36m[0m
+  [36m213[0m  [36m(defn rollback-page [][0m
+  [36m214[0m  [36m  [main-content-layout rollback-panel])[0m
+
+[36m----  Compiler Warning : Please see src/cljs/db_devops/pages/rollback.cljs  ----[0m
+[36m----  Compiler Warning on   src/cljs/db_devops/pages/rollback.cljs   line:211  column:6  ----[0m
+
+  [1mUse of undeclared Var soda-ash.core/menuItem[0m
+
+  [36m207[0m  [36m   [sa/Menu[0m
+  [36m208[0m  [36m    {:tabular true}[0m
+  [36m209[0m  [36m    [sa/menuItem "CDC升级回退方案" :pane (r/as-component [cdc-rollback-table])][0m
+  [36m210[0m  [36m    [sa/menuItem "本地大版本升级回退方案" :pane (r/as-component [local-version-rollback-table])][0m
+  [33m211[0m  [1m    [sa/menuItem "本地小补丁升级回退方案" :pane (r/as-component [local-fixpack-rollback-table])]]])[0m
+  [0m   [0m  [33m     ^--- Use of undeclared Var soda-ash.core/menuItem[0m
+  [36m212[0m  [36m[0m
+  [36m213[0m  [36m(defn rollback-page [][0m
+  [36m214[0m  [36m  [main-content-layout rollback-panel])[0m
+
+[36m----  Compiler Warning : Please see src/cljs/db_devops/pages/rollback.cljs  ----[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.917 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[36m----  Compiler Warning on   src/cljs/db_devops/pages/rollback.cljs   line:209  column:6  ----[0m
+
+  [1mUse of undeclared Var soda-ash.core/menuItem[0m
+
+  [36m205[0m  [36m   [panel-header "回退方案"][0m
+  [36m206[0m  [36m   [sa/Divider][0m
+  [36m207[0m  [36m   [sa/Menu[0m
+  [36m208[0m  [36m    {:tabular true}[0m
+  [33m209[0m  [1m    [sa/menuItem "CDC升级回退方案"[0m
+  [0m   [0m  [33m     ^--- Use of undeclared Var soda-ash.core/menuItem[0m
+  [36m210[0m  [36m     [cdc-rollback-table]][0m
+  [36m211[0m  [36m    [sa/menuItem "本地大版本升级回退方案" [local-version-rollback-table]][0m
+  [36m212[0m  [36m    [sa/menuItem "本地小补丁升级回退方案" [local-fixpack-rollback-table]]]])[0m
+  [36m213[0m  [36m[0m
+  [36m214[0m  [36m(defn rollback-page [][0m
+
+[36m----  Compiler Warning : Please see src/cljs/db_devops/pages/rollback.cljs  ----[0m
+[36m----  Compiler Warning on   src/cljs/db_devops/pages/rollback.cljs   line:211  column:6  ----[0m
+
+  [1mUse of undeclared Var soda-ash.core/menuItem[0m
+
+  [36m207[0m  [36m   [sa/Menu[0m
+  [36m208[0m  [36m    {:tabular true}[0m
+  [36m209[0m  [36m    [sa/menuItem "CDC升级回退方案"[0m
+  [36m210[0m  [36m     [cdc-rollback-table]][0m
+  [33m211[0m  [1m    [sa/menuItem "本地大版本升级回退方案" [local-version-rollback-table]][0m
+  [0m   [0m  [33m     ^--- Use of undeclared Var soda-ash.core/menuItem[0m
+  [36m212[0m  [36m    [sa/menuItem "本地小补丁升级回退方案" [local-fixpack-rollback-table]]]])[0m
+  [36m213[0m  [36m[0m
+  [36m214[0m  [36m(defn rollback-page [][0m
+  [36m215[0m  [36m  [main-content-layout rollback-panel])[0m
+
+[36m----  Compiler Warning : Please see src/cljs/db_devops/pages/rollback.cljs  ----[0m
+[36m----  Compiler Warning on   src/cljs/db_devops/pages/rollback.cljs   line:212  column:6  ----[0m
+
+  [1mUse of undeclared Var soda-ash.core/menuItem[0m
+
+  [36m208[0m  [36m    {:tabular true}[0m
+  [36m209[0m  [36m    [sa/menuItem "CDC升级回退方案"[0m
+  [36m210[0m  [36m     [cdc-rollback-table]][0m
+  [36m211[0m  [36m    [sa/menuItem "本地大版本升级回退方案" [local-version-rollback-table]][0m
+  [33m212[0m  [1m    [sa/menuItem "本地小补丁升级回退方案" [local-fixpack-rollback-table]]]])[0m
+  [0m   [0m  [33m     ^--- Use of undeclared Var soda-ash.core/menuItem[0m
+  [36m213[0m  [36m[0m
+  [36m214[0m  [36m(defn rollback-page [][0m
+  [36m215[0m  [36m  [main-content-layout rollback-panel])[0m
+
+[36m----  Compiler Warning : Please see src/cljs/db_devops/pages/rollback.cljs  ----[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.372 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.92 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.891 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.251 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.972 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.893 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.207 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.924 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.273 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.187 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.25 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.953 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.315 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.273 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.958 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.181 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[31mFailed to compile "target/cljsbuild/public/js/app.js" in 0.667 seconds.[0m
+[36m----  Could not Read  src/cljs/db_devops/pages/rollback.cljs   line:215  column:74  ----[0m
+
+  [1mMap literal must contain an even number of forms[0m
+
+  [36m213[0m  [36m[sa/Tab[0m
+  [36m214[0m  [36m {:renderActiveOnly true[0m
+  [33m215[0m  [1m  :panes [{:menuItem "CDC升级回退方案" :pane {:key "cdc-rollback" :content }}[0m
+  [0m   [0m  [33m                                                                      ^--- Map literal must contain an even number of forms[0m
+  [36m216[0m  [36m          {:menuItem "本地大版本升级回退方案" :pane {:key "local-version-rollback" :content (r/as-component [local-version-rollback-table])}}[0m
+  [36m217[0m  [36m          {:menuItem "本地小补丁升级回退方案" :pane {:key "local-fixpack-rollback" :content (r/as-component [local-fixpack-rollback-table])}}]}]])[0m
+
+[36m----  Reader Error : Please see src/cljs/db_devops/pages/rollback.cljs  ----[0m
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.325 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.233 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.921 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.934 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.229 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.943 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.234 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.271 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/rollback.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 12.026 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/create_db.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.478 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/validation.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 11.571 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/validation.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.98 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/create_db.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.868 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/validation.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 11.675 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/widgets/input_params_table.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.095 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/widgets/input_params_table.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.147 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/phase_one_panel.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.066 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/phase_one_panel.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 2.019 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/goog/deps.js
+notifying browser that file changed:  target/cljsbuild/public/js/out/cljs_deps.js
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/create_db.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.539 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/create_db.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.632 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/create_db.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.391 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/create_db.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.12 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/create_db.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 17.101 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/handlers/phase_one_api.js

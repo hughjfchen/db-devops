@@ -28,39 +28,39 @@
        :size "tiny"
        :fluid true}
       [sa/Step
-       {:title "选择升级方案"
+       {:title "准备 - 选择升级方案"
         :description "选择合适的升级方案"
         :completed false
         :active (boolean (= @current-step :choose-type))
-                                        ;:on-click #(dispatch [:set-active-upgrade-step :choose-type])
+        :on-click #(dispatch [:set-active-upgrade-step :choose-type])
         }]
       [sa/Step
-       {:title "输入参数"
+       {:title "准备 - 输入参数"
         :description "输入升级方案需要用到的参数"
         :completed false
         :active (boolean (= @current-step :source-target))
-                                        ;:on-click #(dispatch [:set-active-upgrade-step :source-target])
+        :on-click #(dispatch [:set-active-upgrade-step :source-target])
         }]
       [sa/Step
-       {:title "检查"
+       {:title "事前检查"
         :description "升级前执行的检查项"
         :completed false
         :active (boolean (= @current-step :checklist))
-                                        ;:on-click #(dispatch [:set-active-upgrade-step :checklist])
+        :on-click #(dispatch [:set-active-upgrade-step :checklist])
         }]
       [sa/Step
-       {:title "升级"
+       {:title "事中升级"
         :description "执行升级任务"
         :completed false
         :active (boolean (= @current-step :upgrade))
-                                        ;:on-click #(dispatch [:set-active-upgrade-step :upgrade])
+        :on-click #(dispatch [:set-active-upgrade-step :upgrade])
         }]
       [sa/Step
-       {:title "校验"
+       {:title "事后校验"
         :description "校验以确保升级成功"
         :completed false
         :active (boolean (= @current-step :verify))
-                                        ;:on-click #(dispatch [:set-active-upgrade-step :verify])
+        :on-click #(dispatch [:set-active-upgrade-step :verify])
         }]]]))
 
 (defn upgrade-choose-type-panel []
@@ -73,13 +73,19 @@
       [sa/ListItem
        {:active (boolean (:local @choice))
         :on-click #(dispatch [:set-chosen-type {:local true :cdc false :other false}])}
-       [sa/ListHeader "本地升级"]
+       [sa/ListHeader "本地大版本升级"]
        [sa/ListContent "升级的数据库系统在本地，这是最简单的一种升级方案。"]]
       [sa/ListItem
        {:active (boolean (:cdc @choice))
         :on-click #(dispatch [:set-chosen-type {:local false :cdc true :other false}])}
        [sa/ListHeader "CDC升级"]
        [sa/ListContent "通过CDC对目标数据库进行升级，相对比较复杂的一种升级方案。"]]
+      [sa/ListItem
+       [sa/ListHeader "本地小补丁升级"]
+       [sa/ListContent "本地小补丁包升级方案，支持v9.5、v9.7和v10.5"]]
+      [sa/ListItem
+       [sa/ListHeader "跨平台版本升级"]
+       [sa/ListContent "支持跨平台间的DB2数据库升级和迁移"]]
       [sa/ListItem
        {:active (boolean (:other @choice))
         :on-click #(dispatch [:set-chosen-type {:local false :cdc false :other true}])}
@@ -93,7 +99,7 @@
      [sa/ButtonGroup
       {:floated "right"}
       [sa/Button
-       {:on-click #(run-events [[:reset-source-target] [:set-active-upgrade-step :source-target]])} "下一步"]]]))
+       {:on-click #(run-events [[:set-active-upgrade-step :source-target]])} "下一步"]]]))
 
 (defn input-field-ui [label value-atom value-path validate-fn validate-atom on-change-fn]
   [sa/FormField
@@ -200,9 +206,11 @@
          [sa/TableCell (get-in cl [:verify :rule-description])]
          [sa/TableCell (str (get-in cl [:execute :output :result :source]))]
          [sa/TableCell (str (get-in cl [:execute :output :result :target]))]
-         [sa/TableCell {:positive (get-in cl [:verify :result])
-                        :negative (not (get-in cl [:verify :result]))}
-          (if (get-in cl [:verify :result]) "通过" "不通过")]
+         (cond
+           (= (:first-cat cl) :manual-check) [sa/TableCell
+                                              [sa/Checkbox {:toggle true}]]
+           (get-in cl [:verify :result]) [sa/TableCell {:positive true :negative false} "通过"]
+           :default [sa/TableCell {:positive false :negative true} "不通过"])
          [sa/TableCell (:comply-suggestion cl)]])]]))
 
 (defn ui-failed-result []
@@ -246,7 +254,7 @@
      [sa/ButtonGroup
       {:floated "left"}
       [sa/Button
-       {:on-click #(run-events [[:reset-source-target] [:set-active-upgrade-step :source-target]])} "上一步"]]
+       {:on-click #(run-events [[:set-active-upgrade-step :source-target]])} "上一步"]]
      [sa/ButtonGroup
       {:floated "right"}
       [ui-failed-result]

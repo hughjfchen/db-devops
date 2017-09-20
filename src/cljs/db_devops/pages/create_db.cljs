@@ -12,7 +12,7 @@
 
 
 (defn create-db-form []
-  (r/with-let [db-info (r/atom {})
+  (r/with-let [db-info (r/atom {:inputParams {:SYS false :FS false :USER false :INST false :DBM false :DB false}})
                v-errors (r/atom nil)]
     [sa/Segment
      {:basic true}
@@ -39,14 +39,7 @@
          [sa/GridColumn
           [ui-input-field "数据库代码页" db-info [:inputParams :CODEPAGE] v/validate-db-info v-errors #(swap! db-info assoc-in [:inputParams :CODEPAGE] (-> % .-target .-value))]]
          [sa/GridColumn
-          [sa/FormField
-           [sa/Label "数据库版本"]
-           [sa/Dropdown
-            {:selection true
-             :placeholder "请选择数据库版本"
-             :default-value (get-in @db-info [:inputParams :DB2VER])
-             :on-change #(swap! db-info assoc-in [:inputParams :DB2VER] (-> %2 .-value))
-             :options [{:key "9.5" :text "9.5" :value "9.5"} {:key "9.7" :text "9.7" :value "9.7"} {:key "10.5" :text "10.5" :value "10.5"}]}]]]
+          [ui-input-field "数据库版本" db-info [:inputParams :DB2VER] v/validate-db-info v-errors #(swap! db-info assoc-in [:inputParams :DB2VER] (-> % .-target .-value))]]
          [sa/GridColumn
           [sa/FormField
            [sa/Label "是否检查"]
@@ -57,6 +50,8 @@
              :on-change #(swap! db-info assoc-in [:inputParams :CHECK] (-> %2 .-value))
              :options [{:key "YES" :text "YES" :value "YES"} {:key "NO" :text "NO" :value "NO"}]}]]]]
         [sa/GridRow {:columns 3}
+         [sa/GridColumn
+          [ui-input-field "脚本路径" db-info [:inputParams :INITDB2PATH] v/validate-db-info v-errors #(swap! db-info assoc-in [:inputParams :INITDB2PATH] (-> % .-target .-value))]]
          [sa/GridColumn
           [ui-input-field "磁盘名" db-info [:inputParams :DISKLIST] v/validate-db-info v-errors #(swap! db-info assoc-in [:inputParams :DISKLIST] (-> % .-target .-value))]]
          [sa/GridColumn

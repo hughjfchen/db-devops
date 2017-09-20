@@ -33,8 +33,8 @@
    [:inputParams :DB2PATH] [[v/required :message "必填"]]
    [:inputParams :DBDATA] [[v/required :message "必填"] [v/positive :message "必须正数"]]
    [:inputParams :CODEPAGE] [[v/required :message "必填"] [v/positive :message "必须正数"]]
-   [:inputParams :DISKLIST] [[v/required :message "必填"]]
-   [:inputParams :ItilID] [[v/required :message "必填"]]))
+   [:inputParams :DB2VER] [[v/required :message "必填"] [v/matches #"V\d?.\d?.\d?" :message "必须符合格式：Vxx.xx.xx，其中x为数字"]]
+   [:inputParams :INITDB2PATH] [[v/required :message "必填"]]))
 
 (defn validate-tb-info [tb-info]
   (b/validate
