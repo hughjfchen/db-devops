@@ -17507,3 +17507,61 @@ notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/p
 [0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
 [32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 17.101 seconds.[0m
 notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/handlers/phase_one_api.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[36m----  Compiler Warning on   src/cljs/db_devops/pages/checklist_edit.cljs   line:133  column:29  ----[0m
+
+  [1mNo such namespace: clojue.string, could not locate clojue/string.cljs, clojue/string.cljc, or JavaScript source providing "clojue.string"[0m
+
+  [36m129[0m  [36m                :on-change #(swap! edit-checklist assoc-in [:verify :type] (-> %2 .-value keyword))}]]][0m
+  [36m130[0m  [36m[sa/GridColumn {:width 4}[0m
+  [36m131[0m  [36m [sa/FormField[0m
+  [36m132[0m  [36m  [sa/Label "校验函数额外参数"][0m
+  [33m133[0m  [1m  [:input {:value (clojue.string/join "," (get-in  @edit-checklist [:verify :rule-fn-extra-paras]))[0m
+  [0m   [0m  [33m                   ^--- No such namespace: clojue.string, could not locate clojue/string.cljs, clojue/string.cljc, or JavaScript source providing "clojue.string"[0m
+  [36m134[0m  [36m           :on-change #(swap! edit-checklist assoc-in [:verify :rule-fn-extra-paras] (-> % .-target .-value convert-fn-extra-paras))}]]][0m
+  [36m135[0m  [36m[sa/GridColumn {:width 4}[0m
+  [36m136[0m  [36m [sa/FormField[0m
+  [36m137[0m  [36m  [sa/Label "校验定制函数"][0m
+  [36m138[0m  [36m  [:input {:value (get-in  @edit-checklist [:verify :rule-fn])[0m
+
+[36m----  Compiler Warning : Please see src/cljs/db_devops/pages/checklist_edit.cljs  ----[0m
+[36m----  Compiler Warning on   src/cljs/db_devops/pages/checklist_edit.cljs   line:133  column:29  ----[0m
+
+  [1mUse of undeclared Var clojue.string/join[0m
+
+  [36m129[0m  [36m                :on-change #(swap! edit-checklist assoc-in [:verify :type] (-> %2 .-value keyword))}]]][0m
+  [36m130[0m  [36m[sa/GridColumn {:width 4}[0m
+  [36m131[0m  [36m [sa/FormField[0m
+  [36m132[0m  [36m  [sa/Label "校验函数额外参数"][0m
+  [33m133[0m  [1m  [:input {:value (clojue.string/join "," (get-in  @edit-checklist [:verify :rule-fn-extra-paras]))[0m
+  [0m   [0m  [33m                   ^--- Use of undeclared Var clojue.string/join[0m
+  [36m134[0m  [36m           :on-change #(swap! edit-checklist assoc-in [:verify :rule-fn-extra-paras] (-> % .-target .-value convert-fn-extra-paras))}]]][0m
+  [36m135[0m  [36m[sa/GridColumn {:width 4}[0m
+  [36m136[0m  [36m [sa/FormField[0m
+  [36m137[0m  [36m  [sa/Label "校验定制函数"][0m
+  [36m138[0m  [36m  [:input {:value (get-in  @edit-checklist [:verify :rule-fn])[0m
+
+[36m----  Compiler Warning : Please see src/cljs/db_devops/pages/checklist_edit.cljs  ----[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 15.901 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/checklist_edit.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.893 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/checklist_edit.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.249 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/checklist_edit.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.807 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/checklist_edit.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.232 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/checklist_edit.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.179 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/checklist_edit.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 0.962 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/checklist_edit.js
+[0mCompiling "target/cljsbuild/public/js/app.js" from ["src/cljs" "src/cljc" "env/dev/cljs"]...[0m
+[32mSuccessfully compiled "target/cljsbuild/public/js/app.js" in 1.094 seconds.[0m
+notifying browser that file changed:  target/cljsbuild/public/js/out/db_devops/pages/checklist_edit.js

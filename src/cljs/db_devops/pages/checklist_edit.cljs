@@ -48,7 +48,7 @@
 (defn- convert-fn-extra-paras [xs]
   (into [] (map (fn [y] (if (clstr/numeric? y)
                           (clstr/parse-number y)
-                          y)) (clojure.string/split xs #","))))
+                          y)) (clstr/split xs ","))))
 
 (defn checklist-edit-form [checklist]
   (r/with-let [step (name (:step checklist))
@@ -130,8 +130,8 @@
          [sa/GridColumn {:width 4}
           [sa/FormField
            [sa/Label "校验函数额外参数"]
-           [:input {:value (get-in  @edit-checklist [:verify :rule-fn-extra-paras])
-                    :on-change #(swap! edit-checklist assoc-in [:verify :rule-fn-extra-paras] (-> % .-target .-value))}]]]
+           [:input {:value (clstr/join "," (get-in  @edit-checklist [:verify :rule-fn-extra-paras]))
+                    :on-change #(swap! edit-checklist assoc-in [:verify :rule-fn-extra-paras] (-> % .-target .-value convert-fn-extra-paras))}]]]
          [sa/GridColumn {:width 4}
           [sa/FormField
            [sa/Label "校验定制函数"]
@@ -156,10 +156,9 @@
      [sa/ButtonGroup
       {:floated "right"}
       [sa/Button
-       {:on-click #(do (swap! edit-checklist assoc-in [:verify :rule-fn-extra-paras] (convert-fn-extra-paras (get-in @edit-checklist [:verify :rule-fn-extra-paras])))
-                       (if (:id checklist)
-                         (run-events [[:save-checklist step  @edit-checklist] [:set-active-page :checklist-management]])
-                         (run-events [[:create-checklist step  @edit-checklist] [:set-active-page :checklist-management]])))} "保存"]]]))
+       {:on-click #(if (:id checklist)
+                     (run-events [[:save-checklist step  @edit-checklist] [:set-active-page :checklist-management]])
+                     (run-events [[:create-checklist step  @edit-checklist] [:set-active-page :checklist-management]]))} "保存"]]]))
 
 (defn checklist-edit-panel []
   (r/with-let [checklist (subscribe [:edit-checklist])]
