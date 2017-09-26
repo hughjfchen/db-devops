@@ -22,12 +22,15 @@
  (fn [db _]
    (dissoc db :task-output)))
 
+(defn- task->posttask [req]
+  (or (and (contains? req :inputParam) (get-in req [:inputParam :TASKNAME]) (assoc-in req [:inputParam :POSTTASKNAME] (get-in req [:inputParam :TASKNAME]))) req))
+
 (reg-event-db
  :submit-operation
  (fn [db [_ operation params]]
    (POST (str "/api/upgrade-api-submit-operation" "-" (clojure.string/lower-case (name operation)))
          {:params (as-> params $
-                    (assoc-in $ [:inputParam :POSTTASKNAME] (get-in $ [:inputParam :TASKNAME]))
+                    (task->posttask $)
                     (assoc $ :user_id (get-in db [:user :screenname]))
                     (assoc $ :user_name (get-in db [:user :screenname]))
                     (assoc $ :funcid operation)

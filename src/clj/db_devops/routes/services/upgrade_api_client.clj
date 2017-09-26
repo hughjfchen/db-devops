@@ -102,8 +102,8 @@
 (def InitCDCRequest
   (-> {:inputParam TaskInfo
        :dbParams [(-> AliasRecord
-                      (assoc :FORWARD s/Bool)
-                      (assoc :REVERSE s/Bool))]
+                      (assoc (s/optional-key :FORWARD) s/Bool)
+                      (assoc (s/optional-key :REVERSE) s/Bool))]
        :funcid funcid}
       (merge user)))
 
