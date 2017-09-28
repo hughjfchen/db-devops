@@ -25,7 +25,7 @@
                   :TGDBNAME s/Str
                   :TGPORT s/Num
                   :TASKNAME s/Str
-                  (s/optional-key :DIRECTION) (s/maybe s/Str)
+                  (s/optional-key :DIRECTION) (s/maybe s/Num)
                   (s/optional-key :OVERFLOWLOGPATH) (s/maybe s/Str)
                   (s/optional-key :EXTABLE) (s/maybe s/Str)
                   (s/optional-key :BACKUPTIMESTAMP) (s/maybe s/Str)

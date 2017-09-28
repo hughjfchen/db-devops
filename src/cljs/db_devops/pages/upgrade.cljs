@@ -78,14 +78,14 @@
       [sa/ListItem
        {:active (boolean (:cdc @choice))
         :on-click #(dispatch [:set-chosen-type {:local false :cdc true :other false}])}
-       [sa/ListHeader "CDC升级"]
+       [sa/ListHeader "CDC分钟级升级"]
        [sa/ListContent "通过CDC对目标数据库进行升级，相对比较复杂的一种升级方案。"]]
       [sa/ListItem
        [sa/ListHeader "本地小补丁升级"]
        [sa/ListContent "本地小补丁包升级方案，支持v9.5、v9.7和v10.5"]]
       [sa/ListItem
-       [sa/ListHeader "跨平台版本升级"]
-       [sa/ListContent "支持跨平台间的DB2数据库升级和迁移"]]
+       [sa/ListHeader "跨机备份恢复升级"]
+       [sa/ListContent "通过在线备份恢复前滚的方式对目标数据库进行升级"]]
       [sa/ListItem
        {:active (boolean (:other @choice))
         :on-click #(dispatch [:set-chosen-type {:local false :cdc false :other true}])}
